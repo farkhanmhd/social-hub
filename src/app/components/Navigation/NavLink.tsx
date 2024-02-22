@@ -9,7 +9,7 @@ export default function NavLink({
   children: React.ReactNode;
 }) {
   return (
-    <li>
+    <li className="text-2xl">
       <Link
         href={href}
         className="block rounded-md px-5 py-3 duration-300 hover:bg-[rgba(70,_70,_70,_.7)]"
