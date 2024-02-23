@@ -18,14 +18,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <React.StrictMode>
+    <React.StrictMode>
+      <html lang="en">
         <body className={inter.className}>
           <Header />
           {children}
           <NavBottom />
         </body>
-      </React.StrictMode>
-    </html>
+      </html>
+    </React.StrictMode>
   );
 }
