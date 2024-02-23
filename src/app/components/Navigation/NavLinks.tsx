@@ -14,7 +14,7 @@ export default function NavLinks() {
       <NavLink href="/">
         <IoHomeOutline />
       </NavLink>
-      <NavLink href="/">
+      <NavLink href="/search">
         <IoSearchOutline />
       </NavLink>
       <NavLink href="/">
