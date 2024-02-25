@@ -6,6 +6,7 @@ import Header from "@/app/components/Header/Header";
 import NavBottom from "@/app/components/Navigation/NavBottom";
 import { useAppDispatch, useAppSelector } from "./states/hooks";
 import asyncPreloadProcess from "./states/isPreload/thunk";
+import Loading from "./components/Loading/Loading";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const disableNavbar = ["/login", "/register"];
@@ -40,6 +41,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <>
       {!disableNavbar.includes(pathname) && <Header />}
+      <Loading />
       {children}
       {!disableNavbar.includes(pathname) && <NavBottom />}
     </>

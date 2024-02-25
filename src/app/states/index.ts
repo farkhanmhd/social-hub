@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { loadingBarReducer } from "react-redux-loading-bar";
 import authUserSlice from "./authUser/slice";
 import isPreloadSlice from "./isPreload/slice";
 
@@ -6,6 +7,7 @@ const store = configureStore({
   reducer: {
     authUser: authUserSlice,
     isPreload: isPreloadSlice,
+    loadingBar: loadingBarReducer,
   },
 });
 
