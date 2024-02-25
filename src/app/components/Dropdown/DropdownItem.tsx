@@ -5,11 +5,5 @@ export default function DropdownItem({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <li>
-      <span className="font-semibold text-black dark:text-white">
-        {children}
-      </span>
-    </li>
-  );
+  return <li>{children}</li>;
 }

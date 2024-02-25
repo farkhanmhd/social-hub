@@ -4,10 +4,18 @@ import React from "react";
 import Link from "next/link";
 import FormInput from "@/app/components/Form/FormInput";
 import useInput from "@/app/hooks/useInput";
+import { useAppDispatch } from "@/app/states/hooks";
+import { asyncSetAuthUser } from "@/app/states/authUser/thunk";
 
 export default function LoginPage() {
   const { value: email, onChange: setEmail } = useInput("");
   const { value: password, onChange: setPassword } = useInput("");
+  const dispatch = useAppDispatch();
+
+  const onLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(asyncSetAuthUser({ email, password }));
+  };
 
   return (
     <div className="flex min-h-screen flex-1 flex-col items-center justify-center px-6 py-12 lg:px-8">
@@ -18,8 +26,8 @@ export default function LoginPage() {
         </h2>
       </div>
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6">
+      <div className="mt-10 w-full sm:mx-auto sm:max-w-sm">
+        <form className="space-y-6" onSubmit={(e) => onLogin(e)}>
           <FormInput
             label="Email address"
             type="email"

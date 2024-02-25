@@ -21,15 +21,16 @@ export default function Header() {
         </div>
         <NavHeader />
         <div id="dropdown-menu" className="dropdown dropdown-end">
-          <button
+          <div
+            tabIndex={0}
+            role="button"
             id="menu-button"
-            type="button"
             className="text-4xl duration-200 hover:text-black"
           >
             {}
             <IoReorderTwoOutline />
             <Dropdown />
-          </button>
+          </div>
         </div>
       </div>
     </header>

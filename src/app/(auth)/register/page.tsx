@@ -18,7 +18,7 @@ export default function RegisterPage() {
         </h2>
       </div>
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="mt-10 w-full sm:mx-auto sm:max-w-sm">
         <form className="space-y-6">
           <FormInput
             label="Your Name"
