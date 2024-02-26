@@ -1,35 +1,15 @@
-import React from "react";
-import { useAppDispatch } from "@/app/states/hooks";
-import { asyncUnsetAuthUser } from "@/app/states/authUser/thunk";
-import Link from "next/link";
-import DropdownItem from "./DropdownItem";
+import React, { forwardRef } from "react";
 
-export default function Dropdown() {
-  const dispatch = useAppDispatch();
-  const onLogout = () => {
-    dispatch(asyncUnsetAuthUser());
-  };
-
-  const switchTheme = () => {};
-
-  const itemClass: string = "font-semibold text-black dark:text-white";
-  return (
-    <ul className="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
-      <DropdownItem>
-        <Link className={itemClass} href="/leaderboard">
-          Leaderboard
-        </Link>
-      </DropdownItem>
-      <DropdownItem>
-        <button type="button" onClick={switchTheme} className={itemClass}>
-          Switch Theme
-        </button>
-      </DropdownItem>
-      <DropdownItem>
-        <button type="button" onClick={onLogout} className={itemClass}>
-          Logout
-        </button>
-      </DropdownItem>
+const Dropdown = forwardRef<HTMLUListElement, { children: React.ReactNode }>(
+  ({ children }, ref) => (
+    <ul
+      id="dropdown-list"
+      className="absolute right-0 z-10 mt-2 flex w-56 origin-top-right flex-col gap-y-2 rounded-lg bg-white p-2 shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
+      ref={ref}
+    >
+      {children}
     </ul>
-  );
-}
+  ),
+);
+
+export default Dropdown;

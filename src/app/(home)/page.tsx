@@ -7,10 +7,6 @@ export const metadata: Metadata = {
   authors: [{ name: "Farkhan Muhammad", url: "https://github.com/farkhanmhd" }],
 };
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>Start Here</h1>
-    </main>
-  );
+export default function HomePage() {
+  return <h1>Start Here</h1>;
 }
