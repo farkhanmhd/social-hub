@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { IoReorderTwoOutline } from "react-icons/io5";
 import { useAppDispatch } from "@/app/states/hooks";
 import useReduxSelector from "@/app/hooks/useReduxSelector";
@@ -18,7 +18,7 @@ export default function Header() {
   const { dropDownMode } = useReduxSelector();
   const dispatch = useAppDispatch();
   const itemClass: string =
-    "px-3 py-2 font-semibold text-black dark:text-white text-sm hover:bg-gray-200 dark:hover:bg-gray-700 block w-full h-full text-left rounded-lg";
+    "px-3 py-2 font-semibold text-black dark:text-white text-sm hover:bg-gray-200 dark:hover:bg-gray-700 block w-full h-full text-left rounded-lg flex items-center gap-x-3";
 
   const toggleDropdown = () => {
     dispatch(setDropDownMode("main"));
@@ -26,7 +26,7 @@ export default function Header() {
   };
 
   useClickOutside(dropdownRef, () => {
-    setIsDropdownOpen(false);
+    if (isDropdownOpen) setIsDropdownOpen(false);
   });
 
   return (
@@ -47,7 +47,7 @@ export default function Header() {
           <button
             type="button"
             id="menu-btn-icon"
-            className="text-4xl duration-200 hover:text-black"
+            className={`text-4xl duration-200 hover:text-black ${isDropdownOpen && "text-black"}`}
             onClick={toggleDropdown}
             ref={dropdownBtn}
           >

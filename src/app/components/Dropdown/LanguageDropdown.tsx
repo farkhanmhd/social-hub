@@ -2,7 +2,6 @@ import React from "react";
 import { useAppDispatch } from "@/app/states/hooks";
 import {
   IoChevronBack,
-  IoSunnyOutline,
   IoMoonOutline,
   IoDesktopOutline,
 } from "react-icons/io5";
@@ -33,17 +32,9 @@ export default function ThemeDropDownItems({
       <li>
         <button type="button" onClick={switchTheme} className={itemClass}>
           <span>
-            <IoSunnyOutline />
-          </span>
-          <span>Light</span>
-        </button>
-      </li>
-      <li>
-        <button type="button" onClick={switchTheme} className={itemClass}>
-          <span>
             <IoMoonOutline />
           </span>
-          <span>Dark</span>
+          <span>English</span>
         </button>
       </li>
       <li>
@@ -51,7 +42,7 @@ export default function ThemeDropDownItems({
           <span>
             <IoDesktopOutline />
           </span>
-          <span>System Default</span>
+          <span>Indonesia</span>
         </button>
       </li>
     </>

@@ -17,13 +17,13 @@ export default function NavLinks() {
       <NavLink href="/search">
         <IoSearchOutline />
       </NavLink>
-      <NavLink href="/">
+      <NavLink href="">
         <IoCreateOutline />
       </NavLink>
-      <NavLink href="/">
+      <NavLink href="/likes">
         <IoHeartOutline />
       </NavLink>
-      <NavLink href="/">
+      <NavLink href="/profile">
         <IoPersonOutline />
       </NavLink>
     </>

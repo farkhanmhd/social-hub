@@ -3,6 +3,12 @@ import Link from "next/link";
 import { useAppDispatch } from "@/app/states/hooks";
 import { asyncUnsetAuthUser } from "@/app/states/authUser/thunk";
 import { setDropDownMode } from "@/app/states/dropDownMode/slice";
+import {
+  IoBarChart,
+  IoLanguage,
+  IoDesktopOutline,
+  IoLogOutOutline,
+} from "react-icons/io5";
 
 export default function MainDropdownItems({
   itemClass,
@@ -17,11 +23,15 @@ export default function MainDropdownItems({
   const onLogout = () => {
     dispatch(asyncUnsetAuthUser());
   };
+
   return (
     <>
       <li>
         <Link className={itemClass} href="/leaderboard">
-          Leaderboard
+          <span>
+            <IoBarChart />
+          </span>
+          <span>Leaderboard</span>
         </Link>
       </li>
       <li>
@@ -30,7 +40,10 @@ export default function MainDropdownItems({
           onClick={() => switchDropdown("theme")}
           className={itemClass}
         >
-          Switch Theme
+          <span>
+            <IoDesktopOutline />
+          </span>
+          <span>Switch Theme</span>
         </button>
       </li>
       <li>
@@ -39,12 +52,18 @@ export default function MainDropdownItems({
           onClick={() => dispatch(setDropDownMode("language"))}
           className={itemClass}
         >
-          Change Language
+          <span>
+            <IoLanguage />
+          </span>
+          <span>Change Language</span>
         </button>
       </li>
       <li>
         <button type="button" onClick={onLogout} className={itemClass}>
-          Logout
+          <span>
+            <IoLogOutOutline />
+          </span>
+          <span>Logout</span>
         </button>
       </li>
     </>
