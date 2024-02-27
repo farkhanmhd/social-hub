@@ -6,7 +6,7 @@ import {
   IoMoonOutline,
   IoDesktopOutline,
 } from "react-icons/io5";
-import backToMainMenu from "../../utils/util";
+import { backToMainMenu } from "../../utils/util";
 
 export default function ThemeDropDownItems({
   itemClass,
@@ -21,7 +21,7 @@ export default function ThemeDropDownItems({
       <li>
         <button
           type="button"
-          onClick={() => backToMainMenu.backToMainMenu(dispatch)}
+          onClick={() => backToMainMenu(dispatch)}
           className={itemClass}
         >
           <span>

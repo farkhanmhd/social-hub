@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppDispatch } from "@/app/states/hooks";
 import { IoArrowBackOutline } from "react-icons/io5";
-import backToMainMenu from "../../utils/util";
+import { backToMainMenu } from "../../utils/util";
 
 export default function LanguageDropdownItems({
   itemClass,
@@ -16,7 +16,7 @@ export default function LanguageDropdownItems({
       <li>
         <button
           type="button"
-          onClick={() => backToMainMenu.backToMainMenu(dispatch)}
+          onClick={() => backToMainMenu(dispatch)}
           className={itemClass}
         >
           <span>
