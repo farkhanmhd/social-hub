@@ -3,6 +3,7 @@ import { loadingBarReducer } from "react-redux-loading-bar";
 import authUserSlice from "./authUser/slice";
 import isPreloadSlice from "./isPreload/slice";
 import dropDownModeSlice from "./dropDownMode/slice";
+import threadSlice from "./threads/slice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     isPreload: isPreloadSlice,
     dropDownMode: dropDownModeSlice,
     loadingBar: loadingBarReducer,
+    threads: threadSlice,
   },
 });
 

@@ -2,7 +2,7 @@
   grid-template-columns: 1fr 18fr 2fr;
   grid-template-areas:
     "owner-photo author posting-time"
-    "owner-photo title title"
+    "line title title"
     "line category category"
     "line body body"
     "line interaction interaction"

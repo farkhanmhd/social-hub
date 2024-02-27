@@ -197,6 +197,26 @@ async function getThreadDetail(id: string) {
   return detailThread;
 }
 
+async function getThreadOwner(id: string) {
+  const response = await fetch(`${BASE_URL}/threads/${id}`);
+
+  const responseJson = await response.json();
+
+  const { status, message } = responseJson;
+
+  if (status !== "success") {
+    throw new Error(message);
+  }
+
+  const {
+    data: { detailThread },
+  } = responseJson;
+
+  const { name: ownerName, avatar: ownerProfilePicture } = detailThread.owner;
+
+  return { ownerName, ownerProfilePicture };
+}
+
 async function createComment({
   content,
   threadId,
@@ -340,6 +360,7 @@ export {
   createThread,
   getAllThreads,
   getThreadDetail,
+  getThreadOwner,
   createComment,
   likeThread,
   dislikeThread,

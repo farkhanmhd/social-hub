@@ -5,19 +5,21 @@ import "../../styles/Thread.css";
 import Image from "next/image";
 import useReduxSelector from "@/app/hooks/useReduxSelector";
 import Link from "next/link";
+import parse from "html-react-parser";
 import {
   IoHeartOutline,
   IoHeartDislikeOutline,
   IoChatbubbleOutline,
 } from "react-icons/io5";
+import { getTimeDifference } from "@/app/utils/util";
 
 interface ThreadProps {
-  id: number;
+  id: string;
   title: string;
   body: string;
   category: string;
   createdAt: string;
-  ownerId: number;
+  ownerId: string;
   upVotesBy: number[];
   downVotesBy: number[];
   totalComments: number;
@@ -40,10 +42,10 @@ export default function Thread({
 }: ThreadProps) {
   const { authUser } = useReduxSelector();
   return (
-    <li>
+    <li className="border-t first:border-none">
       <Link href={`/${ownerId}/post/${id}`}>
         <div className="thread-container grid gap-1 p-3 text-[15px]">
-          <div className="thread-owner-photo mt-1 flex">
+          <div className="thread-owner-photo flex items-center">
             <div id="avatar-start-thread" className="w-[36px]">
               <Image
                 src={ownerProfilePicture}
@@ -54,10 +56,10 @@ export default function Thread({
               />
             </div>
           </div>
-          <div className="thread-author ml-2">
+          <div className="thread-author ml-2 flex items-center">
             <p className="font-semibold">{ownerName}</p>
           </div>
-          <div className="thread-title ml-2">
+          <div className="thread-title mb-2 ml-2">
             <h1 className="text-2xl font-semibold">{title}</h1>
           </div>
           <div className="thread-category">
@@ -68,13 +70,13 @@ export default function Thread({
               {category}
             </button>
           </div>
-          <div className="thread-posting-time">
-            <p className="text-[#ababab]">{createdAt}</p>
+          <div className="thread-posting-time flex items-center">
+            <p className="text-[#ababab]">{getTimeDifference(createdAt)}</p>
           </div>
           <div className="thread-body ml-2 py-2">
-            <p className="">{body}</p>
+            <div>{parse(body)}</div>
           </div>
-          <div className="thread-line mx-auto h-full w-[2px] bg-[#ababab]" />
+          <div className="thread-line mx-auto mt-2 h-full w-[2px] bg-[#ababab]" />
           <div className="thread-commenter-photos mt-2 flex content-center items-center justify-center">
             <div
               id="avatar-start-thread"
@@ -103,10 +105,11 @@ export default function Thread({
               <IoChatbubbleOutline />
             </button>
           </div>
-          <div className="thread-footer ml-2 mt-2 flex  items-center text-[#ababab]">
+          <div className="thread-footer ml-2 mt-2 flex items-center gap-x-2 text-[#ababab]">
             <span>{totalComments} replies</span>
-            <span className="mx-2 mb-2">.</span>
+            <span className="mx-1 mb-2">.</span>
             <span>{upVotesBy.length} likes</span>
+            <span className="mb-2">.</span>
             <span>{downVotesBy.length} dislikes</span>
           </div>
         </div>

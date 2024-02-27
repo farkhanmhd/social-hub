@@ -1,24 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface Thread {
-  id: number;
+export interface ThreadInterface {
+  id: string;
   title: string;
   body: string;
   category: string;
   createdAt: string;
-  ownerId: number;
+  ownerId: string;
   upVotesBy: number[];
   downVotesBy: number[];
   totalComments: number;
+  ownerName: string;
+  ownerProfilePicture: string;
 }
 
-interface ThreadsState {
-  threads: Thread[];
-}
-
-const initialState: ThreadsState = {
-  threads: [],
-};
+const initialState: ThreadInterface[] = [];
 
 const threadSlice = createSlice({
   name: "threads",
