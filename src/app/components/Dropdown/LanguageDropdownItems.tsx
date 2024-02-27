@@ -1,13 +1,9 @@
 import React from "react";
 import { useAppDispatch } from "@/app/states/hooks";
-import {
-  IoChevronBack,
-  IoMoonOutline,
-  IoDesktopOutline,
-} from "react-icons/io5";
+import { IoArrowBackOutline } from "react-icons/io5";
 import backToMainMenu from "../../utils/util";
 
-export default function ThemeDropDownItems({
+export default function LanguageDropdownItems({
   itemClass,
 }: {
   itemClass: string;
@@ -24,24 +20,18 @@ export default function ThemeDropDownItems({
           className={itemClass}
         >
           <span>
-            <IoChevronBack />
+            <IoArrowBackOutline />
           </span>
           <span>Back</span>
         </button>
       </li>
       <li>
         <button type="button" onClick={switchTheme} className={itemClass}>
-          <span>
-            <IoMoonOutline />
-          </span>
           <span>English</span>
         </button>
       </li>
       <li>
         <button type="button" onClick={switchTheme} className={itemClass}>
-          <span>
-            <IoDesktopOutline />
-          </span>
           <span>Indonesia</span>
         </button>
       </li>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppDispatch } from "@/app/states/hooks";
 import {
-  IoChevronBack,
+  IoArrowBackOutline,
   IoSunnyOutline,
   IoMoonOutline,
   IoDesktopOutline,
@@ -25,7 +25,7 @@ export default function ThemeDropDownItems({
           className={itemClass}
         >
           <span>
-            <IoChevronBack />
+            <IoArrowBackOutline />
           </span>
           <span>Back</span>
         </button>

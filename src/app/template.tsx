@@ -21,9 +21,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isPreload) {
-      return;
-    }
+    if (isPreload) return;
 
     if (authUser === null) {
       if (pathname === "/register") push("/register");
@@ -42,11 +40,11 @@ export default function Template({ children }: { children: React.ReactNode }) {
     <>
       {!disableNavbar.includes(pathname) && <Header />}
       <Loading />
-      <div id="content" className="mt-16 min-h-[calc(100vh-64px)]">
-        <main
-          id="homepage"
-          className="mx-auto  h-full w-full max-w-7xl px-5 sm:px-10"
-        >
+      <div
+        id="content"
+        className={`${disableNavbar.includes(pathname) ? "mt-0" : "mt-[74px]"}  min-h-[calc(100vh-74px)]"`}
+      >
+        <main className="h-full w-full max-w-7xl px-0 sm:mx-auto sm:px-10">
           {children}
         </main>
       </div>

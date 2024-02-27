@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import StartThread from "../components/Thread/StartThread";
 
 export const metadata: Metadata = {
   title: "Social Hub by FarkhanMhd",
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return <h1>Start Here</h1>;
+  return <StartThread />;
 }

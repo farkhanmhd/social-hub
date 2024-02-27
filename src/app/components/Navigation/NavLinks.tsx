@@ -20,7 +20,7 @@ export default function NavLinks() {
       <NavLink href="">
         <IoCreateOutline />
       </NavLink>
-      <NavLink href="/likes">
+      <NavLink href="/activity">
         <IoHeartOutline />
       </NavLink>
       <NavLink href="/profile">

@@ -1,0 +1,50 @@
+.thread-container {
+  grid-template-columns: 1fr 18fr 2fr;
+  grid-template-areas:
+    "owner-photo author posting-time"
+    "owner-photo title title"
+    "line category category"
+    "line body body"
+    "line interaction interaction"
+    "commenter-photo footer footer";
+}
+
+.thread-owner-photo {
+  grid-area: owner-photo;
+}
+
+.thread-author {
+  grid-area: author;
+}
+
+.thread-posting-time {
+  grid-area: posting-time;
+}
+
+.thread-title {
+  grid-area: title;
+}
+
+.thread-category {
+  grid-area: category;
+}
+
+.thread-body {
+  grid-area: body;
+}
+
+.thread-line {
+  grid-area: line;
+}
+
+.thread-interaction {
+  grid-area: interaction;
+}
+
+.thread-commenter-photos {
+  grid-area: commenter-photo;
+}
+
+.thread-footer {
+  grid-area: footer;
+}

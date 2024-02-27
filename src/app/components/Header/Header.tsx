@@ -10,6 +10,7 @@ import NavHeader from "../Navigation/NavHeader";
 import Dropdown from "../Dropdown/Dropdown";
 import MainDropdownItems from "../Dropdown/MainDropdownItems";
 import ThemeDropDownItems from "../Dropdown/ThemeDropDownItems";
+import LanguageDropdownItems from "../Dropdown/LanguageDropdownItems";
 
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -30,10 +31,10 @@ export default function Header() {
   });
 
   return (
-    <header className="fixed top-0 flex h-16 w-screen items-center  text-[#959494] backdrop-blur-md dark:bg-[rgba(10,_10,_10,_.9)]">
+    <header className="fixed top-0 flex h-[74px] w-screen items-center  text-[#959494] backdrop-blur-md dark:bg-[rgba(10,_10,_10,_.9)]">
       <div
         id="header-contents"
-        className="mx-auto flex w-full max-w-[1280px] flex-row-reverse items-center px-5 sm:px-10 md:relative md:flex-row md:justify-between"
+        className="mx-auto flex h-full w-full max-w-[1280px] flex-row-reverse items-center px-5 sm:px-10 md:relative md:flex-row md:justify-between"
       >
         <div
           id="logo"
@@ -56,10 +57,14 @@ export default function Header() {
           </button>
           {isDropdownOpen && (
             <Dropdown ref={dropdownRef}>
-              {dropDownMode === "main" ? (
+              {dropDownMode === "main" && (
                 <MainDropdownItems itemClass={itemClass} />
-              ) : (
+              )}
+              {dropDownMode === "theme" && (
                 <ThemeDropDownItems itemClass={itemClass} />
+              )}
+              {dropDownMode === "language" && (
+                <LanguageDropdownItems itemClass={itemClass} />
               )}
             </Dropdown>
           )}
