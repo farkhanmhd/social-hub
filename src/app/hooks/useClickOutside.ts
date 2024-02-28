@@ -10,6 +10,7 @@ const useClickOutside = (
         return;
       }
       handler(event);
+      event.stopPropagation();
     };
     document.addEventListener("click", listener);
     document.addEventListener("touchstart", listener);

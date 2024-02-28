@@ -1,5 +1,6 @@
-import { putAccessToken, login, getOwnProfile } from "@/app/utils/api";
+import { putAccessToken, login, getOwnProfile } from "@/app/api/api";
 import { AppDispatch } from "@/app/states/index";
+import { hideLoading, showLoading } from "react-redux-loading-bar";
 import { setAuthUser } from "./slice";
 
 function asyncSetAuthUser({
@@ -10,6 +11,7 @@ function asyncSetAuthUser({
   password: string;
 }) {
   return async (dispatch: AppDispatch) => {
+    dispatch(showLoading());
     try {
       const token = await login({ email, password });
       putAccessToken(token);
@@ -20,6 +22,7 @@ function asyncSetAuthUser({
       // gotta change this
       JSON.stringify(err);
     }
+    dispatch(hideLoading());
   };
 }
 

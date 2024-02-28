@@ -6,9 +6,12 @@ import {
   IoHeartOutline,
   IoPersonOutline,
 } from "react-icons/io5";
+import useReduxSelector from "@/app/hooks/useReduxSelector";
 import NavLink from "./NavLink";
+import NavButton from "./NavButton";
 
 export default function NavLinks() {
+  const { authUser } = useReduxSelector();
   return (
     <>
       <NavLink href="/">
@@ -17,13 +20,13 @@ export default function NavLinks() {
       <NavLink href="/search">
         <IoSearchOutline />
       </NavLink>
-      <NavLink href="">
+      <NavButton>
         <IoCreateOutline />
-      </NavLink>
+      </NavButton>
       <NavLink href="/activity">
         <IoHeartOutline />
       </NavLink>
-      <NavLink href="/profile">
+      <NavLink href={`/${authUser?.id}`}>
         <IoPersonOutline />
       </NavLink>
     </>

@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import useReduxSelector from "@/app/hooks/useReduxSelector";
 import { useAppDispatch } from "@/app/states/hooks";
-import asyncSetThread from "@/app/states/threads/thunk";
+import { asyncSetThread } from "@/app/states/threads/thunk";
 import { ThreadInterface } from "@/app/states/threads/slice";
 import Thread from "./Thread";
 

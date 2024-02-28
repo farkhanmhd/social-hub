@@ -4,6 +4,7 @@ import authUserSlice from "./authUser/slice";
 import isPreloadSlice from "./isPreload/slice";
 import dropDownModeSlice from "./dropDownMode/slice";
 import threadSlice from "./threads/slice";
+import postModalSlice from "./postModal/slice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     dropDownMode: dropDownModeSlice,
     loadingBar: loadingBarReducer,
     threads: threadSlice,
+    postModal: postModalSlice,
   },
 });
 

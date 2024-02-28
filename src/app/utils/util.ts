@@ -15,25 +15,32 @@ function getTimeDifference(postTime: string): string {
   let timePassed: string = "";
 
   if (timeDifference < 60) {
-    timePassed = `${Math.floor(timeDifference)} s`;
+    timePassed = `${Math.floor(timeDifference)}s`;
   } else if (timeDifference < 3600) {
     const minutes: number = Math.floor(timeDifference / 60);
-    timePassed = `${minutes} min`;
+    timePassed = `${minutes}min`;
   } else if (timeDifference < 86400) {
     const hours: number = Math.floor(timeDifference / 3600);
-    timePassed = `${hours} h`;
+    timePassed = `${hours}h`;
   } else if (timeDifference < 604800) {
     const days: number = Math.floor(timeDifference / 86400);
-    timePassed = `${days} d`;
+    timePassed = `${days}d`;
   } else if (timeDifference < 2629746) {
     const weeks: number = Math.floor(timeDifference / 604800);
-    timePassed = `${weeks} w`;
-  } else {
+    timePassed = `${weeks}w`;
+  } else if (timeDifference < 31536000) {
     const months: number = Math.floor(timeDifference / 2629746);
-    timePassed = `${months} mo`;
+    timePassed = `${months}mo`;
+  } else {
+    const years: number = Math.floor(timeDifference / 31536000);
+    timePassed = `${years}y`;
   }
 
   return timePassed;
 }
 
-export { backToMainMenu, getTimeDifference };
+function formattedDate(date: Date) {
+  return date.toISOString();
+}
+
+export { backToMainMenu, getTimeDifference, formattedDate };

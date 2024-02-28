@@ -9,6 +9,17 @@
     "commenter-photo footer footer";
 }
 
+.start-thread-container {
+  grid-template-columns: 1fr 18fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 5fr 1fr;
+  grid-template-areas:
+    "owner-photo author posting-time"
+    "line title title"
+    "line category category"
+    "line body body"
+    "commenter-photo footer button";
+}
+
 .thread-owner-photo {
   grid-area: owner-photo;
 }
@@ -47,4 +58,35 @@
 
 .thread-footer {
   grid-area: footer;
+}
+
+.thread-post-button {
+  grid-area: button;
+}
+
+@media (max-width: 768px) {
+  .start-thread-container {
+    grid-template-columns: 1fr 18fr 1fr;
+    grid-template-rows: max-content min-content min-content min-content 3fr min-content;
+    grid-template-areas:
+      "cancel new-thread empty"
+      "owner-photo author posting-time"
+      "line title title"
+      "line category category"
+      "line body body"
+      "commenter-photo footer button";
+  }
+
+  .thread-owner-photo {
+    place-self: center;
+  }
+
+  #new-thread-inside {
+    grid-area: new-thread;
+    place-self: start center;
+  }
+
+  .thread-cancel-button {
+    grid-area: cancel;
+  }
 }

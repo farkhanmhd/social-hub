@@ -21,9 +21,10 @@ const threadSlice = createSlice({
   initialState,
   reducers: {
     setThreads: (state, action) => action.payload,
+    addNewThread: (state, action) => [action.payload, ...state],
   },
 });
 
-export const { setThreads } = threadSlice.actions;
+export const { setThreads, addNewThread } = threadSlice.actions;
 
 export default threadSlice.reducer;

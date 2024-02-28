@@ -8,11 +8,12 @@ import { useAppDispatch } from "./states/hooks";
 import asyncPreloadProcess from "./states/isPreload/thunk";
 import Loading from "./components/Loading/Loading";
 import useReduxSelector from "./hooks/useReduxSelector";
+import StartThreadModal from "./components/Thread/StartThreadModal";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const disableNavbar = ["/login", "/register"];
   const pathname = usePathname();
-  const { authUser, isPreload } = useReduxSelector();
+  const { authUser, isPreload, postModal } = useReduxSelector();
   const dispatch = useAppDispatch();
   const { push } = useRouter();
 
@@ -38,13 +39,14 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      {postModal && <StartThreadModal />}
       {!disableNavbar.includes(pathname) && <Header />}
       <Loading />
       <div
         id="content"
-        className={`${disableNavbar.includes(pathname) ? "mt-0" : "mt-[74px]"}  min-h-[calc(100vh-74px)]"`}
+        className={`${disableNavbar.includes(pathname) ? "mt-0" : "mt-[74px]"}  min-h-[calc(100vh-74px)]`}
       >
-        <main className="h-full w-full max-w-7xl px-0 sm:mx-auto sm:px-10">
+        <main className="h-full w-full max-w-7xl px-0 md:mx-auto md:px-10">
           {children}
         </main>
       </div>

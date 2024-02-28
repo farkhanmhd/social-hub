@@ -1,5 +1,5 @@
 import { AppDispatch } from "@/app/states/index";
-import { getOwnProfile } from "@/app/utils/api";
+import { getOwnProfile } from "@/app/api/api";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 import { setAuthUser } from "../authUser/slice";
 import { setIsPreload } from "./slice";
