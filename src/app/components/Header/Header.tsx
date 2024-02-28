@@ -44,11 +44,11 @@ export default function Header() {
           <span className="font-semibold text-blue-500">Hub</span>
         </div>
         <NavHeader />
-        <div id="dropdown" className="relative">
+        <div id="dropdown" className="relative text-blue-300 ">
           <button
             type="button"
             id="menu-btn-icon"
-            className={`text-4xl duration-200 hover:text-black ${isDropdownOpen && "text-black"}`}
+            className={`text-4xl duration-200 hover:text-blue-500 ${isDropdownOpen && "text-blue-500"}`}
             onClick={toggleDropdown}
             ref={dropdownBtn}
           >
