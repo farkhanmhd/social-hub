@@ -19,7 +19,7 @@ export default function Header() {
   const { dropDownMode } = useReduxSelector();
   const dispatch = useAppDispatch();
   const itemClass: string =
-    "px-3 py-2 font-semibold text-black dark:text-white text-sm hover:bg-gray-200 dark:hover:bg-gray-700 block w-full h-full text-left rounded-lg flex items-center gap-x-3";
+    "px-3 py-2 font-semibold dark:text-white text-sm hover:bg-gray-200 dark:hover:bg-gray-700 block w-full h-full text-left rounded-lg flex items-center gap-x-3";
 
   const toggleDropdown = () => {
     dispatch(setDropDownMode("main"));

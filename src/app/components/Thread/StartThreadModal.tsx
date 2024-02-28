@@ -12,7 +12,7 @@ import { ThreadInterface } from "@/app/states/threads/slice";
 import { useRouter } from "next/navigation";
 
 export default function StartThreadModal() {
-  const { authUser } = useReduxSelector();
+  const { authUser, threads } = useReduxSelector();
   const dispatch = useAppDispatch();
   const {
     value: title,
@@ -37,7 +37,7 @@ export default function StartThreadModal() {
   });
 
   const submittedThread: ThreadInterface = {
-    id: authUser?.id,
+    id: "",
     title,
     body,
     category,

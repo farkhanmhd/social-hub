@@ -1,11 +1,21 @@
 import { AppDispatch } from "@/app/states/index";
-import { getAllThreads, getThreadOwner, createThread } from "@/app/api/api";
+import {
+  getAllThreads,
+  getThreadOwner,
+  createThread,
+  likeThread,
+} from "@/app/api/api";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
-import { ThreadInterface, setThreads, addNewThread } from "./slice";
+import {
+  ThreadInterface,
+  setThreads,
+  addNewThread,
+  updateLikeThread,
+  updateDislikeThread,
+} from "./slice";
 
 function asyncSetThread() {
   return async (dispatch: AppDispatch) => {
-    dispatch(showLoading());
     try {
       const threads = await getAllThreads();
 
@@ -22,9 +32,8 @@ function asyncSetThread() {
 
       dispatch(setThreads(threadsWithOwners));
     } catch (error) {
-      JSON.stringify(error);
+      alert(error);
     }
-    dispatch(hideLoading());
   };
 }
 
@@ -37,11 +46,52 @@ function asyncAddThread(
     dispatch(addNewThread(newThread));
     try {
       await createThread({ title, body, category });
-    } catch {
+    } catch (error) {
       dispatch(asyncSetThread());
+      alert(error);
+    }
+    dispatch(asyncSetThread());
+    dispatch(hideLoading());
+  };
+}
+
+function asyncLikeThread({
+  threadId,
+  userId,
+}: {
+  threadId: string;
+  userId: string;
+}) {
+  return async (dispatch: AppDispatch) => {
+    dispatch(showLoading());
+    dispatch(updateLikeThread({ threadId, userId }));
+    try {
+      await likeThread({ threadId });
+    } catch (error) {
+      dispatch(asyncSetThread());
+      alert(error);
+    }
+    dispatch(hideLoading());
+  };
+}
+function asyncDisLikeThread({
+  threadId,
+  userId,
+}: {
+  threadId: string;
+  userId: string;
+}) {
+  return async (dispatch: AppDispatch) => {
+    dispatch(showLoading());
+    dispatch(updateDislikeThread({ threadId, userId }));
+    try {
+      await likeThread({ threadId });
+    } catch (error) {
+      dispatch(asyncSetThread());
+      alert(error);
     }
     dispatch(hideLoading());
   };
 }
 
-export { asyncSetThread, asyncAddThread };
+export { asyncSetThread, asyncAddThread, asyncLikeThread, asyncDisLikeThread };

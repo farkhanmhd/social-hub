@@ -4,13 +4,13 @@ export default function ThreadButton({
   onClick,
   children,
 }: {
-  onClick: () => void;
+  onClick: (e: React.MouseEvent) => void;
   children: React.ReactNode;
 }) {
   return (
     <button
       type="button"
-      className="rounded-full p-2 hover:bg-black/5"
+      className="rounded-full p-2 text-xl hover:bg-black/5"
       onClick={onClick}
     >
       {children}

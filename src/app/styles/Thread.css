@@ -5,8 +5,7 @@
     "line title title"
     "line category category"
     "line body body"
-    "line interaction interaction"
-    "commenter-photo footer footer";
+    "commenter-photo interaction interaction";
 }
 
 .start-thread-container {
@@ -54,10 +53,6 @@
 
 .thread-commenter-photos {
   grid-area: commenter-photo;
-}
-
-.thread-footer {
-  grid-area: footer;
 }
 
 .thread-post-button {

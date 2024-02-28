@@ -14,11 +14,11 @@ export default function ListOfThread() {
   useEffect(() => {
     dispatch(asyncSetThread());
 
-    const intervalID = setInterval(() => {
-      dispatch(asyncSetThread());
-    }, 10000);
+    // const intervalID = setInterval(() => {
+    //   dispatch(asyncSetThread());
+    // }, 10000);
 
-    return () => clearInterval(intervalID);
+    // return () => clearInterval(intervalID);
   }, [dispatch]);
 
   return (
