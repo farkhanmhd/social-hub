@@ -3,6 +3,7 @@
 import React from "react";
 import { Inter } from "next/font/google";
 import "./styles/globals.css";
+import "./styles/Thread.css";
 import { Provider } from "react-redux";
 import store from "./states";
 
