@@ -1,3 +1,5 @@
+import { User } from "../states/authUser/slice";
+
 const BASE_URL: string = "https://forum-api.dicoding.dev/v1";
 
 function putAccessToken(token: string): void {
@@ -104,6 +106,20 @@ async function getAllUsers() {
   return users;
 }
 
+async function getSingleUser({ id }: { id: string }) {
+  const response = await fetch(`${BASE_URL}/users`);
+  const responseJson = await response.json();
+  const { status, message } = responseJson;
+  if (status !== "success") {
+    throw new Error(message);
+  }
+  const {
+    data: { users },
+  } = responseJson;
+  const userDetail = users.find((user: User) => user.id === id);
+  return userDetail;
+}
+
 async function getOwnProfile() {
   const response = await fetchWithAuth({ url: `${BASE_URL}/users/me` });
 
@@ -198,23 +214,13 @@ async function getThreadDetail(id: string) {
 }
 
 async function getThreadOwner(id: string) {
-  const response = await fetch(`${BASE_URL}/threads/${id}`);
+  const data = await getThreadDetail(id);
+  const ownerName = data.owner.name;
+  const ownerProfilePicture = data.owner.profilePicture;
+  const { avatar } = data.owner;
+  const { comments } = data;
 
-  const responseJson = await response.json();
-
-  const { status, message } = responseJson;
-
-  if (status !== "success") {
-    throw new Error(message);
-  }
-
-  const {
-    data: { detailThread },
-  } = responseJson;
-
-  const { name: ownerName, avatar: ownerProfilePicture } = detailThread.owner;
-
-  return { ownerName, ownerProfilePicture };
+  return { ownerName, ownerProfilePicture, comments, avatar };
 }
 
 async function createComment({
@@ -286,6 +292,22 @@ async function dislikeThread({ threadId }: { threadId: string }) {
   }
 }
 
+async function neutralizeThreadLike({ threadId }: { threadId: string }) {
+  const response = await fetchWithAuth({
+    url: `${BASE_URL}/threads/${threadId}/neutral-vote`,
+    options: {
+      method: "POST",
+    },
+  });
+
+  const responseJson = await response.json();
+
+  return {
+    status: responseJson.status,
+    message: responseJson.message,
+  };
+}
+
 async function likeComment({
   threadId,
   commentId,
@@ -350,6 +372,27 @@ async function getLeaderBoards() {
   return leaderboards;
 }
 
+async function neutralizeCommentLike({
+  threadId,
+  commentId,
+}: {
+  threadId: string;
+  commentId: string;
+}) {
+  const response = await fetchWithAuth({
+    url: `${BASE_URL}/threads/${threadId}/comments/${commentId}/neutral-vote`,
+    options: {
+      method: "POST",
+    },
+  });
+  const responseJson = await response.json();
+
+  return {
+    status: responseJson.status,
+    message: responseJson.message,
+  };
+}
+
 export {
   putAccessToken,
   getAccessToken,
@@ -367,4 +410,7 @@ export {
   likeComment,
   dislikeComment,
   getLeaderBoards,
+  getSingleUser,
+  neutralizeThreadLike,
+  neutralizeCommentLike,
 };

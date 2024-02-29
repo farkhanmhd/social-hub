@@ -19,6 +19,33 @@
     "commenter-photo footer button";
 }
 
+.thread-detail .thread-container {
+  grid-template-columns: 1fr 18fr 2fr;
+  grid-template-areas:
+    "owner-photo author posting-time"
+    "title title title"
+    "category category category"
+    "body body body"
+    "interaction interaction interaction";
+}
+
+.thread-detail .thread-container {
+  grid-template-columns: 1fr 18fr 2fr;
+  grid-template-areas:
+    "owner-photo author posting-time"
+    "title title title"
+    "category category category"
+    "body body body"
+    "interaction interaction interaction";
+}
+.thread-detail .comment-container {
+  grid-template-columns: 1fr 18fr 2fr;
+  grid-template-areas:
+    "owner-photo author posting-time"
+    "owner-photo body body"
+    "owner-photo interaction interaction";
+}
+
 .thread-owner-photo {
   grid-area: owner-photo;
 }

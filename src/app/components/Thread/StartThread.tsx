@@ -4,8 +4,11 @@ import React from "react";
 import Image from "next/image";
 import useReduxSelector from "@/app/hooks/useReduxSelector";
 import Link from "next/link";
+import { useAppDispatch } from "@/app/states/hooks";
+import openModal from "@/app/states/postModal/thunk";
 
 export default function StartThread() {
+  const dispatch = useAppDispatch();
   const { authUser } = useReduxSelector();
   return (
     <div className="hidden h-[70px] items-center gap-2 border-b px-3 sm:flex">
@@ -23,9 +26,13 @@ export default function StartThread() {
           />
         </Link>
       </div>
-      <h1 className="flex-[3] cursor-text pl-1 text-[14px] font-light text-[#959494]">
+      <button
+        type="button"
+        className="flex-[3] cursor-text pl-1 text-left text-[14px] font-light text-[#959494]"
+        onClick={() => dispatch(openModal())}
+      >
         Start a Thread...
-      </h1>
+      </button>
       <button
         type="button"
         className="h-[36px] w-16 cursor-not-allowed rounded-full bg-[#b1b1b1] px-4 py-[6px] text-[12px] font-medium text-white sm:text-[15px]"

@@ -1,5 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export interface ThreadCommentOwnerInterface {
+  id: string;
+  name: string;
+  avatar: string;
+}
+
+export interface ThreadCommentsInterface {
+  id: string;
+  content: string;
+  createdAt: string;
+  owner: ThreadCommentOwnerInterface;
+  upVotesBy: string[];
+  downVotesBy: string[];
+}
+
 export interface ThreadInterface {
   id: string;
   title: string;
@@ -11,7 +26,8 @@ export interface ThreadInterface {
   downVotesBy: string[];
   totalComments: number;
   ownerName: string;
-  ownerProfilePicture: string;
+  avatar: string;
+  comments: ThreadCommentsInterface[];
 }
 
 const initialState: ThreadInterface[] = [];
@@ -40,6 +56,7 @@ const threadSlice = createSlice({
         }
       }
     },
+
     updateDislikeThread: (state, action) => {
       const { threadId, userId } = action.payload;
 
@@ -58,6 +75,20 @@ const threadSlice = createSlice({
         }
       }
     },
+
+    updateNeutralizeThreadLike: (state, action) => {
+      const { threadId, userId } = action.payload;
+
+      const threadToUpdate = state.find((thread) => thread.id === threadId);
+      if (threadToUpdate) {
+        threadToUpdate.upVotesBy = threadToUpdate.upVotesBy.filter(
+          (id) => id !== userId,
+        );
+        threadToUpdate.downVotesBy = threadToUpdate.downVotesBy.filter(
+          (id) => id !== userId,
+        );
+      }
+    },
   },
 });
 
@@ -66,6 +97,7 @@ export const {
   addNewThread,
   updateLikeThread,
   updateDislikeThread,
+  updateNeutralizeThreadLike,
 } = threadSlice.actions;
 
 export default threadSlice.reducer;

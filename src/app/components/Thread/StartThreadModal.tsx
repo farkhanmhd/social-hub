@@ -9,11 +9,12 @@ import useClickOutside from "@/app/hooks/useClickOutside";
 import useInput from "@/app/hooks/useInput";
 import { asyncAddThread } from "@/app/states/threads/thunk";
 import { ThreadInterface } from "@/app/states/threads/slice";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function StartThreadModal() {
   const { authUser } = useReduxSelector();
   const dispatch = useAppDispatch();
+  const pathname = usePathname();
   const {
     value: title,
     onChange: onTitleChange,
@@ -54,7 +55,9 @@ export default function StartThreadModal() {
     e.preventDefault();
     dispatch(asyncAddThread({ ...submittedThread }, { title, category, body }));
     dispatch(setPostModal(false));
-    push("/");
+    if (pathname === "/" || pathname === "/search") {
+      push("/");
+    }
     setTitle("");
     setBody("");
     setCategory("");

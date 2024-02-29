@@ -4,6 +4,8 @@ import {
   getThreadOwner,
   createThread,
   likeThread,
+  dislikeThread,
+  neutralizeThreadLike,
 } from "@/app/api/api";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 import {
@@ -12,6 +14,7 @@ import {
   addNewThread,
   updateLikeThread,
   updateDislikeThread,
+  updateNeutralizeThreadLike,
 } from "./slice";
 
 function asyncSetThread() {
@@ -85,7 +88,7 @@ function asyncDisLikeThread({
     dispatch(showLoading());
     dispatch(updateDislikeThread({ threadId, userId }));
     try {
-      await likeThread({ threadId });
+      await dislikeThread({ threadId });
     } catch (error) {
       dispatch(asyncSetThread());
       alert(error);
@@ -94,4 +97,30 @@ function asyncDisLikeThread({
   };
 }
 
-export { asyncSetThread, asyncAddThread, asyncLikeThread, asyncDisLikeThread };
+function asyncNeutralizeThreadLike({
+  threadId,
+  userId,
+}: {
+  threadId: string;
+  userId: string;
+}) {
+  return async (dispatch: AppDispatch) => {
+    dispatch(showLoading());
+    dispatch(updateNeutralizeThreadLike({ threadId, userId }));
+    try {
+      await neutralizeThreadLike({ threadId });
+    } catch (error) {
+      dispatch(asyncSetThread());
+      alert(error);
+    }
+    dispatch(hideLoading());
+  };
+}
+
+export {
+  asyncSetThread,
+  asyncAddThread,
+  asyncLikeThread,
+  asyncDisLikeThread,
+  asyncNeutralizeThreadLike,
+};

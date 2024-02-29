@@ -22,8 +22,6 @@ export default function Template({ children }: { children: React.ReactNode }) {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isPreload) return;
-
     if (authUser === null) {
       if (pathname === "/register") push("/register");
       else push("/login");
@@ -37,6 +35,8 @@ export default function Template({ children }: { children: React.ReactNode }) {
     }
   }, [authUser, pathname, push, isPreload]);
 
+  if (isPreload) return null;
+
   return (
     <>
       {postModal && <StartThreadModal />}
@@ -46,7 +46,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
         id="content"
         className={`${disableNavbar.includes(pathname) ? "mt-0" : "mt-[74px]"}  min-h-[calc(100vh-74px)]`}
       >
-        <main className="h-full w-full max-w-7xl px-0 pb-[50px] md:mx-auto md:px-10 md:pb-0">
+        <main className="min-h-[calc(100vh-74px)] w-full max-w-7xl px-0 pb-[50px] md:mx-auto md:px-10 md:pb-0">
           {children}
         </main>
       </div>

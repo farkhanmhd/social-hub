@@ -3,6 +3,7 @@ import { getOwnProfile } from "@/app/api/api";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 import { setAuthUser } from "../authUser/slice";
 import { setIsPreload } from "./slice";
+import { asyncSetThread } from "../threads/thunk";
 
 function asyncPreloadProcess() {
   return async (dispatch: AppDispatch) => {
@@ -14,6 +15,7 @@ function asyncPreloadProcess() {
       dispatch(setAuthUser(null));
     } finally {
       dispatch(setIsPreload(false));
+      dispatch(asyncSetThread());
     }
     dispatch(hideLoading());
   };

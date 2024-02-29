@@ -6,6 +6,7 @@ function useReduxSelector() {
   const dropDownMode = useAppSelector((state) => state.dropDownMode);
   const threads = useAppSelector((state) => state.threads);
   const postModal = useAppSelector((state) => state.postModal);
+  const profile = useAppSelector((state) => state.profile);
 
   return {
     authUser,
@@ -13,6 +14,7 @@ function useReduxSelector() {
     dropDownMode,
     threads,
     postModal,
+    profile,
   };
 }
 
