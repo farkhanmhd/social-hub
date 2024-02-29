@@ -46,7 +46,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
         id="content"
         className={`${disableNavbar.includes(pathname) ? "mt-0" : "mt-[74px]"}  min-h-[calc(100vh-74px)]`}
       >
-        <main className="h-full w-full max-w-7xl px-0 md:mx-auto md:px-10">
+        <main className="h-full w-full max-w-7xl px-0 pb-[50px] md:mx-auto md:px-10 md:pb-0">
           {children}
         </main>
       </div>

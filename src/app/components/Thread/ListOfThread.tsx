@@ -1,26 +1,14 @@
 "use client";
 
-import React, { useEffect } from "react";
-import useReduxSelector from "@/app/hooks/useReduxSelector";
-import { useAppDispatch } from "@/app/states/hooks";
-import { asyncSetThread } from "@/app/states/threads/thunk";
+import React from "react";
 import { ThreadInterface } from "@/app/states/threads/slice";
 import Thread from "./Thread";
 
-export default function ListOfThread() {
-  const { threads }: { threads: ThreadInterface[] } = useReduxSelector();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(asyncSetThread());
-
-    // const intervalID = setInterval(() => {
-    //   dispatch(asyncSetThread());
-    // }, 10000);
-
-    // return () => clearInterval(intervalID);
-  }, [dispatch]);
-
+export default function ListOfThread({
+  threads,
+}: {
+  threads: ThreadInterface[];
+}) {
   return (
     <ul>
       {threads.map((thread: ThreadInterface) => (
