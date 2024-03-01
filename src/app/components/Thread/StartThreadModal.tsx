@@ -119,10 +119,10 @@ export default function StartThreadModal() {
             required
           />
         </div>
-        <div className="thread-category">
+        <div className="thread-category ml-2">
           <input
             type="text"
-            className="w-full px-2 py-1 text-sm focus:outline-none"
+            className="w-full  py-1 text-sm focus:outline-none"
             placeholder="Category"
             value={category.length > 20 ? category.slice(0, 20) : category}
             onChange={onCategoryChange}

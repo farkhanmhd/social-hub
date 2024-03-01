@@ -6,6 +6,10 @@ import {
   likeThread,
   dislikeThread,
   neutralizeThreadLike,
+  createComment,
+  likeComment,
+  neutralizeCommentLike,
+  dislikeComment,
 } from "@/app/api/api";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 import {
@@ -15,6 +19,10 @@ import {
   updateLikeThread,
   updateDislikeThread,
   updateNeutralizeThreadLike,
+  updateThreadComments,
+  updateCommentLike,
+  updateCommentDisLike,
+  updateNeutralizeCommentLike,
 } from "./slice";
 
 function asyncSetThread() {
@@ -117,10 +125,70 @@ function asyncNeutralizeThreadLike({
   };
 }
 
+function asyncAddComment(id: string, comment: string, authUser: any) {
+  return async (dispatch: AppDispatch) => {
+    dispatch(updateThreadComments({ id, comment, authUser }));
+    try {
+      await createComment({ content: comment, threadId: id });
+    } catch (error) {
+      dispatch(asyncSetThread());
+      alert(error);
+    }
+  };
+}
+
+function asyncLikeComment(threadId: string, commentId: string, userId: string) {
+  return async (dispatch: AppDispatch) => {
+    dispatch(updateCommentLike({ threadId, commentId, userId }));
+    try {
+      await likeComment({ threadId, commentId });
+    } catch (error) {
+      dispatch(asyncSetThread());
+      alert(error);
+    }
+  };
+}
+
+function asyncDisLikeComment(
+  threadId: string,
+  commentId: string,
+  userId: string,
+) {
+  return async (dispatch: AppDispatch) => {
+    dispatch(updateCommentDisLike({ threadId, commentId, userId }));
+    try {
+      await dislikeComment({ threadId, commentId });
+    } catch (error) {
+      dispatch(asyncSetThread());
+      alert(error);
+    }
+  };
+}
+
+function asyncNeutralizeCommentLike(
+  threadId: string,
+  commentId: string,
+  userId: string,
+) {
+  return async (dispatch: AppDispatch) => {
+    dispatch(updateNeutralizeCommentLike({ threadId, commentId, userId }));
+    try {
+      await neutralizeCommentLike({ threadId, commentId });
+    } catch (error) {
+      dispatch(asyncSetThread());
+      alert(error);
+    }
+  };
+}
+
 export {
   asyncSetThread,
   asyncAddThread,
   asyncLikeThread,
   asyncDisLikeThread,
   asyncNeutralizeThreadLike,
+  asyncAddComment,
+  asyncLikeComment,
+  asyncDisLikeComment,
+  asyncNeutralizeCommentLike,
 };

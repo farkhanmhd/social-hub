@@ -15,11 +15,11 @@ import {
   ThreadCommentOwnerInterface,
   ThreadCommentsInterface,
 } from "@/app/states/threads/slice";
-// import {
-//   asyncLikeThread,
-//   asyncDisLikeThread,
-//   asyncNeutralizeThreadLike,
-// } from "@/app/states/threads/thunk";
+import {
+  asyncLikeComment,
+  asyncDisLikeComment,
+  asyncNeutralizeCommentLike,
+} from "@/app/states/threads/thunk";
 import { useAppDispatch } from "@/app/states/hooks";
 import ThreadButton from "./ThreadButton";
 
@@ -31,54 +31,39 @@ export default function ThreadComment({
   upVotesBy,
   downVotesBy,
   id,
+  threadId,
 }: {
+  id: string;
   avatar: string;
   name: string;
   content: string;
   createdAt: string;
   upVotesBy: string[];
   downVotesBy: string[];
-  id: string;
+  threadId: string;
 }) {
   const { authUser } = useReduxSelector();
   const dispatch = useAppDispatch();
 
   const onLikeHandler = (e: React.MouseEvent) => {
     e.preventDefault();
-    // if (!threadItemProps.upVotesBy.includes(authUser.id)) {
-    //   dispatch(
-    //     asyncLikeThread({ threadId: threadItemProps.id, userId: authUser.id }),
-    //   );
-    // } else {
-    //   dispatch(
-    //     asyncNeutralizeThreadLike({
-    //       threadId: threadItemProps.id,
-    //       userId: authUser.id,
-    //     }),
-    //   );
-    // }
+    if (!upVotesBy.includes(authUser.id)) {
+      dispatch(asyncLikeComment(threadId, id, authUser.id));
+    } else {
+      dispatch(asyncNeutralizeCommentLike(threadId, id, authUser.id));
+    }
   };
   const onDislikeHandler = (e: React.MouseEvent) => {
     e.preventDefault();
-    // if (!threadItemProps.downVotesBy.includes(authUser.id)) {
-    //   dispatch(
-    //     asyncDisLikeThread({
-    //       threadId: threadItemProps.id,
-    //       userId: authUser.id,
-    //     }),
-    //   );
-    // } else {
-    //   dispatch(
-    //     asyncNeutralizeThreadLike({
-    //       threadId: threadItemProps.id,
-    //       userId: authUser.id,
-    //     }),
-    //   );
-    // }
+    if (!downVotesBy.includes(authUser.id)) {
+      dispatch(asyncDisLikeComment(threadId, id, authUser.id));
+    } else {
+      dispatch(asyncNeutralizeCommentLike(threadId, id, authUser.id));
+    }
   };
   return (
     <div className="comment-container grid border-t p-3 text-[15px]" id={id}>
-      <div className="comment-owner-photo -mt-14 mr-4 flex self-start md:mt-1">
+      <div className="comment-owner-photo mr-4 mt-1 flex self-start">
         <div id="avatar-start-comment" className="w-[36px] ">
           <Image
             src={avatar}
@@ -101,15 +86,23 @@ export default function ThreadComment({
       <div className="comment-interaction flex items-center gap-x-4">
         <div className="likes-interaction flex items-center">
           <ThreadButton onClick={onLikeHandler}>
-            <IoHeartOutline />
+            {upVotesBy.includes(authUser.id) ? (
+              <IoHeart className="text-red-500" />
+            ) : (
+              <IoHeartOutline />
+            )}
           </ThreadButton>
-          <span>{upVotesBy.length}</span>
+          {upVotesBy.length > 0 && <span>{upVotesBy.length}</span>}
         </div>
         <div className="dislikes-interaction flex items-center">
           <ThreadButton onClick={onDislikeHandler}>
-            <IoHeartDislikeOutline />
+            {downVotesBy.includes(authUser.id) ? (
+              <IoHeartDislike className="text-red-500" />
+            ) : (
+              <IoHeartDislikeOutline />
+            )}
           </ThreadButton>
-          <span>{downVotesBy.length}</span>
+          {downVotesBy.length > 0 && <span>{downVotesBy.length}</span>}
         </div>
       </div>
     </div>

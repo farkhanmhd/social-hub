@@ -7,6 +7,7 @@
     "line body body"
     "commenter-photo interaction interaction";
 }
+
 .thread-comment-modal .comment-modal-container {
   grid-template-columns: 1fr 18fr 2fr;
   grid-template-areas:
@@ -117,6 +118,20 @@
       "line title title"
       "line category category"
       "line body body"
+      "commenter-photo footer button";
+  }
+
+  .thread-comment-modal .comment-modal-container {
+    grid-template-columns: 1fr 18fr 1fr;
+    grid-template-rows: max-content min-content min-content min-content 3fr min-content;
+    grid-template-areas:
+      "cancel new-thread empty"
+      "owner-photo author posting-time"
+      "line title title"
+      "line category category"
+      "line body body"
+      "commenter-photo comment-author comment-author"
+      "commenter-photo comment-body comment-body"
       "commenter-photo footer button";
   }
 

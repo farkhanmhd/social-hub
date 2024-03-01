@@ -339,7 +339,7 @@ async function dislikeComment({
   commentId: string;
 }) {
   const response = await fetchWithAuth({
-    url: `${BASE_URL}/threads/${threadId}/comments/${commentId}/up-vote`,
+    url: `${BASE_URL}/threads/${threadId}/comments/${commentId}/down-vote`,
     options: {
       method: "POST",
     },

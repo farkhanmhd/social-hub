@@ -9,11 +9,13 @@ import asyncPreloadProcess from "./states/isPreload/thunk";
 import Loading from "./components/Loading/Loading";
 import useReduxSelector from "./hooks/useReduxSelector";
 import StartThreadModal from "./components/Thread/StartThreadModal";
+import StartCommentModal from "./components/Thread/StartCommentModal";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const disableNavbar = ["/login", "/register"];
   const pathname = usePathname();
-  const { authUser, isPreload, postModal } = useReduxSelector();
+  const { authUser, isPreload, postModal, commentModal, commentModalState } =
+    useReduxSelector();
   const dispatch = useAppDispatch();
   const { push } = useRouter();
 
@@ -40,7 +42,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <>
       {postModal && <StartThreadModal />}
-
+      {commentModal && (
+        <StartCommentModal threadItemProps={commentModalState} />
+      )}
       {!disableNavbar.includes(pathname) && <Header />}
       <Loading />
       <div

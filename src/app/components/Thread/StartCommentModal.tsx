@@ -7,7 +7,9 @@ import { ThreadInterface } from "@/app/states/threads/slice";
 import Image from "next/image";
 import { getTimeDifference } from "@/app/utils/util";
 import parse from "html-react-parser";
+import { asyncAddComment } from "@/app/states/threads/thunk";
 import ContentEditable, { ContentEditableEvent } from "react-contenteditable";
+import { useRouter } from "next/navigation";
 
 export default function StartCommentModal({
   threadItemProps,
@@ -19,9 +21,10 @@ export default function StartCommentModal({
   const modalRef = useRef<HTMLDivElement>(null);
   const [commentValue, setCommentValue] = useState("");
   const commentContentEl = document.querySelector(".start-comment-content");
+  const { push } = useRouter();
 
-  const onCommentChange = (evt: ContentEditableEvent) => {
-    setCommentValue(evt.target.value);
+  const onCommentChange = (e: ContentEditableEvent) => {
+    setCommentValue(e.target.value);
   };
 
   useEffect(() => {
@@ -30,18 +33,45 @@ export default function StartCommentModal({
         commentContentEl.innerHTML = "";
       }
     }
-  }, [commentValue]);
+  }, [commentValue, commentContentEl]);
 
   useClickOutside(modalRef, () => {
     dispatch(setCommentModal(false));
   });
+
+  const onAddComment = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(asyncAddComment(threadItemProps.id, commentValue, authUser));
+    dispatch(setCommentModal(false));
+    setCommentValue("");
+    if (commentContentEl) {
+      commentContentEl.innerHTML = "";
+    }
+    push(`/${threadItemProps.ownerId}/post/${threadItemProps.id}`);
+  };
+
   return (
-    <div className="thread-comment-modal fixed left-0 top-0 z-[999] flex h-screen w-screen flex-col items-center justify-center bg-black/50">
+    <div className="thread-comment-modal fixed left-0 top-0 z-[9999] flex h-screen w-screen flex-col items-center justify-center bg-black/50">
       <div
         id="comment-modal-cotainer"
-        className="comment-modal-container grid max-h-[70vh] max-w-[560px] gap-1 overflow-auto rounded-lg bg-white p-3 text-[15px]"
+        className="comment-modal-container grid h-screen w-screen gap-1 rounded-lg bg-white p-3 text-[13px] sm:text-[15px] md:h-auto md:max-w-[620px]"
         ref={modalRef}
       >
+        <div className="thread-cancel-button mb-8">
+          <button
+            type="submit"
+            className="text-black md:hidden"
+            onClick={() => dispatch(setCommentModal(false))}
+          >
+            Cancel
+          </button>
+        </div>
+        <h2
+          id="new-thread-inside"
+          className="absolute left-1/2 block -translate-x-1/2 text-[15px] font-semibold text-black md:hidden"
+        >
+          New thread
+        </h2>
         <div className="thread-owner-photo flex items-center">
           <div id="avatar-start-thread" className="w-[36px]">
             <Image
@@ -54,7 +84,7 @@ export default function StartCommentModal({
           </div>
         </div>
         <div className="thread-author ml-4 flex items-center">
-          <p className="font-semibold">Nama</p>
+          <p className="font-semibold">{threadItemProps?.ownerName}</p>
         </div>
         <div className="thread-title my-3 ml-0">
           <h1 className="text-xl font-semibold sm:text-2xl">
@@ -101,6 +131,7 @@ export default function StartCommentModal({
           <button
             type="button"
             className={`h-[36px] w-16 ${commentValue === "" || commentValue === "<br>" ? "cursor-not-allowed bg-[#b1b1b1]" : "cursor-pointer bg-black"}  rounded-full  px-4 py-[6px] font-medium text-white`}
+            onClick={(e) => onAddComment(e)}
           >
             Post
           </button>

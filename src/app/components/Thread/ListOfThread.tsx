@@ -17,6 +17,7 @@ export default function ListOfThread({
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const id = pathname?.split("/").pop();
+  console.log(threads);
   return (
     <>
       <ul>

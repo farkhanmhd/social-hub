@@ -12,7 +12,6 @@ export default function PostPage() {
   const { threads, isPreload } = useReduxSelector();
   const dispatch = useAppDispatch();
   const pathname = usePathname();
-  const threadId = pathname?.split("/").pop();
 
   useEffect(() => {
     dispatch(asyncSetThread());
@@ -24,7 +23,7 @@ export default function PostPage() {
   }, [dispatch]);
 
   if (isPreload || !threads) return <div>Loading...</div>;
-
+  const threadId: string = pathname?.split("/").pop() || "";
   const filteredThread = threads.find((thread) => thread.id === threadId);
 
   if (!filteredThread) return <div>Thread not found</div>;
@@ -32,7 +31,7 @@ export default function PostPage() {
   return (
     <div className="thread-detail flex h-full w-full flex-grow flex-col">
       <ThreadItem threadItemProps={filteredThread} mode="detail" />
-      <ListOfComments comments={filteredThread.comments} />
+      <ListOfComments comments={filteredThread.comments} threadId={threadId} />
     </div>
   );
 }

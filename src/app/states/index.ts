@@ -6,6 +6,7 @@ import dropDownModeSlice from "./dropDownMode/slice";
 import threadSlice from "./threads/slice";
 import modalSlice from "./modal/slice";
 import profileSlice from "./profile/slice";
+import commentModalStateSlice from "./commentStates/slice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     threads: threadSlice,
     modal: modalSlice,
     profile: profileSlice,
+    commentModalState: commentModalStateSlice.reducer,
   },
 });
 

@@ -89,6 +89,104 @@ const threadSlice = createSlice({
         );
       }
     },
+
+    updateThreadComments: (state, action) => {
+      const { id, comment, authUser } = action.payload;
+      const threadToUpdate = state.find((thread) => thread.id === id);
+      if (threadToUpdate) {
+        threadToUpdate.comments.push({
+          id: "",
+          createdAt: new Date().toISOString(),
+          content: comment,
+          owner: {
+            id: authUser.id,
+            name: authUser.name,
+            avatar: authUser.avatar,
+          },
+          upVotesBy: [],
+          downVotesBy: [],
+        });
+      }
+    },
+
+    updateCommentLike: (state, action) => {
+      const { threadId, commentId, userId } = action.payload;
+
+      return state.map((thread) => {
+        if (thread.id === threadId) {
+          return {
+            ...thread,
+            comments: thread.comments.map((comment) => {
+              if (comment.id === commentId) {
+                const isUserLiked = comment.upVotesBy.includes(userId);
+                if (!isUserLiked) {
+                  return {
+                    ...comment,
+                    upVotesBy: [...comment.upVotesBy, userId],
+                    downVotesBy: comment.downVotesBy.filter(
+                      (id) => id !== userId,
+                    ),
+                  };
+                }
+              }
+              return comment;
+            }),
+          };
+        }
+        return thread;
+      });
+    },
+
+    updateCommentDisLike: (state, action) => {
+      const { threadId, commentId, userId } = action.payload;
+
+      return state.map((thread) => {
+        if (thread.id === threadId) {
+          return {
+            ...thread,
+            comments: thread.comments.map((comment) => {
+              if (comment.id === commentId) {
+                const isUserDisLiked = comment.downVotesBy.includes(userId);
+                if (!isUserDisLiked) {
+                  return {
+                    ...comment,
+                    downVotesBy: [...comment.downVotesBy, userId],
+                    upVotesBy: comment.upVotesBy.filter((id) => id !== userId),
+                  };
+                }
+              }
+              return comment;
+            }),
+          };
+        }
+        return thread;
+      });
+    },
+
+    updateNeutralizeCommentLike: (state, action) => {
+      const { threadId, commentId, userId } = action.payload;
+
+      return state.map((thread) => {
+        if (thread.id === threadId) {
+          return {
+            ...thread,
+            comments: thread.comments.map((comment) => {
+              if (comment.id === commentId) {
+                return {
+                  ...comment,
+                  upVotesBy: comment.upVotesBy.filter((id) => id !== userId),
+                  downVotesBy: comment.downVotesBy.filter(
+                    (id) => id !== userId,
+                  ),
+                };
+              }
+              return comment;
+            }),
+          };
+        }
+        return thread;
+      });
+    },
   },
 });
 
@@ -98,6 +196,10 @@ export const {
   updateLikeThread,
   updateDislikeThread,
   updateNeutralizeThreadLike,
+  updateThreadComments,
+  updateCommentLike,
+  updateCommentDisLike,
+  updateNeutralizeCommentLike,
 } = threadSlice.actions;
 
 export default threadSlice.reducer;
