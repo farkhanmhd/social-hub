@@ -33,4 +33,4 @@ const modalSlice = createSlice({
 
 export const { setPostModal, setCommentModal } = modalSlice.actions;
 
-export default modalSlice.reducer;
+export default modalSlice;

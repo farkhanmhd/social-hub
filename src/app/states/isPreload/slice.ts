@@ -12,4 +12,4 @@ const isPreloadSlice = createSlice({
 
 export const { setIsPreload } = isPreloadSlice.actions;
 
-export default isPreloadSlice.reducer;
+export default isPreloadSlice;

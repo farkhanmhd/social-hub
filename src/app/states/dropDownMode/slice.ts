@@ -12,4 +12,4 @@ const dropDownModeSlice = createSlice({
 
 export const { setDropDownMode } = dropDownModeSlice.actions;
 
-export default dropDownModeSlice.reducer;
+export default dropDownModeSlice;

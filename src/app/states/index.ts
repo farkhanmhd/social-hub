@@ -10,13 +10,13 @@ import commentModalStateSlice from "./commentStates/slice";
 
 const store = configureStore({
   reducer: {
-    authUser: authUserSlice,
-    isPreload: isPreloadSlice,
-    dropDownMode: dropDownModeSlice,
+    authUser: authUserSlice.reducer,
+    isPreload: isPreloadSlice.reducer,
+    dropDownMode: dropDownModeSlice.reducer,
     loadingBar: loadingBarReducer,
-    threads: threadSlice,
-    modal: modalSlice,
-    profile: profileSlice,
+    threads: threadSlice.reducer,
+    modal: modalSlice.reducer,
+    profile: profileSlice.reducer,
     commentModalState: commentModalStateSlice.reducer,
   },
 });

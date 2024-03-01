@@ -12,10 +12,6 @@ import {
 } from "react-icons/io5";
 import { getTimeDifference } from "@/app/utils/util";
 import {
-  ThreadCommentOwnerInterface,
-  ThreadCommentsInterface,
-} from "@/app/states/threads/slice";
-import {
   asyncLikeComment,
   asyncDisLikeComment,
   asyncNeutralizeCommentLike,

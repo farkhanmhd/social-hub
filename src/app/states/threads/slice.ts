@@ -202,4 +202,4 @@ export const {
   updateNeutralizeCommentLike,
 } = threadSlice.actions;
 
-export default threadSlice.reducer;
+export default threadSlice;

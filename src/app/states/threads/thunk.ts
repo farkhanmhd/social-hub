@@ -25,6 +25,7 @@ import {
   updateNeutralizeCommentLike,
 } from "./slice";
 
+// All the code below need to be updated on error handling (catch)
 function asyncSetThread() {
   return async (dispatch: AppDispatch) => {
     try {
@@ -42,7 +43,7 @@ function asyncSetThread() {
       );
 
       dispatch(setThreads(threadsWithOwners));
-    } catch (error) {
+    } catch {
       alert(error);
     }
   };
@@ -57,9 +58,8 @@ function asyncAddThread(
     dispatch(addNewThread(newThread));
     try {
       await createThread({ title, body, category });
-    } catch (error) {
+    } catch {
       dispatch(asyncSetThread());
-      alert(error);
     }
     dispatch(asyncSetThread());
     dispatch(hideLoading());
@@ -78,9 +78,8 @@ function asyncLikeThread({
     dispatch(updateLikeThread({ threadId, userId }));
     try {
       await likeThread({ threadId });
-    } catch (error) {
+    } catch {
       dispatch(asyncSetThread());
-      alert(error);
     }
     dispatch(hideLoading());
   };
@@ -97,9 +96,8 @@ function asyncDisLikeThread({
     dispatch(updateDislikeThread({ threadId, userId }));
     try {
       await dislikeThread({ threadId });
-    } catch (error) {
+    } catch {
       dispatch(asyncSetThread());
-      alert(error);
     }
     dispatch(hideLoading());
   };
@@ -117,9 +115,8 @@ function asyncNeutralizeThreadLike({
     dispatch(updateNeutralizeThreadLike({ threadId, userId }));
     try {
       await neutralizeThreadLike({ threadId });
-    } catch (error) {
+    } catch {
       dispatch(asyncSetThread());
-      alert(error);
     }
     dispatch(hideLoading());
   };
@@ -130,9 +127,8 @@ function asyncAddComment(id: string, comment: string, authUser: any) {
     dispatch(updateThreadComments({ id, comment, authUser }));
     try {
       await createComment({ content: comment, threadId: id });
-    } catch (error) {
+    } catch {
       dispatch(asyncSetThread());
-      alert(error);
     }
   };
 }
@@ -142,9 +138,8 @@ function asyncLikeComment(threadId: string, commentId: string, userId: string) {
     dispatch(updateCommentLike({ threadId, commentId, userId }));
     try {
       await likeComment({ threadId, commentId });
-    } catch (error) {
+    } catch {
       dispatch(asyncSetThread());
-      alert(error);
     }
   };
 }
@@ -158,9 +153,8 @@ function asyncDisLikeComment(
     dispatch(updateCommentDisLike({ threadId, commentId, userId }));
     try {
       await dislikeComment({ threadId, commentId });
-    } catch (error) {
+    } catch {
       dispatch(asyncSetThread());
-      alert(error);
     }
   };
 }
@@ -174,9 +168,8 @@ function asyncNeutralizeCommentLike(
     dispatch(updateNeutralizeCommentLike({ threadId, commentId, userId }));
     try {
       await neutralizeCommentLike({ threadId, commentId });
-    } catch (error) {
+    } catch {
       dispatch(asyncSetThread());
-      alert(error);
     }
   };
 }
