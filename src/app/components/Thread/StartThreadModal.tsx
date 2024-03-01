@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import { useAppDispatch } from "@/app/states/hooks";
-import { setPostModal } from "@/app/states/postModal/slice";
+import { setPostModal } from "@/app/states/modal/slice";
 import useReduxSelector from "@/app/hooks/useReduxSelector";
 import useClickOutside from "@/app/hooks/useClickOutside";
 import useInput from "@/app/hooks/useInput";
@@ -48,7 +48,8 @@ export default function StartThreadModal() {
     downVotesBy: [],
     totalComments: 0,
     ownerName: authUser?.name,
-    ownerProfilePicture: authUser?.avatar,
+    avatar: authUser?.avatar,
+    comments: [],
   };
 
   const onAddThread = (e: React.FormEvent) => {

@@ -5,11 +5,11 @@ import Image from "next/image";
 import useReduxSelector from "@/app/hooks/useReduxSelector";
 import Link from "next/link";
 import { useAppDispatch } from "@/app/states/hooks";
-import openModal from "@/app/states/postModal/thunk";
+import { setPostModal } from "@/app/states/modal/slice";
 
 export default function StartThread() {
   const dispatch = useAppDispatch();
-  const { authUser } = useReduxSelector();
+  const { authUser, postModal } = useReduxSelector();
   return (
     <div className="hidden h-[70px] items-center gap-2 border-b px-3 sm:flex">
       <div
@@ -29,7 +29,7 @@ export default function StartThread() {
       <button
         type="button"
         className="flex-[3] cursor-text pl-1 text-left text-[14px] font-light text-[#959494]"
-        onClick={() => dispatch(openModal())}
+        onClick={() => dispatch(setPostModal(!postModal))}
       >
         Start a Thread...
       </button>

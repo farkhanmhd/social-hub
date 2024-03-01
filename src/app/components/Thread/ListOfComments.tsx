@@ -23,6 +23,7 @@ export default function ListOfComments({
         comments.map((comment: ThreadCommentsInterface) => (
           <li key={comment.id}>
             <ThreadComment
+              id={comment.owner.id}
               avatar={comment.owner.avatar}
               name={comment.owner.name}
               content={comment.content}

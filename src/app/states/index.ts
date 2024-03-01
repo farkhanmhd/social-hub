@@ -4,7 +4,7 @@ import authUserSlice from "./authUser/slice";
 import isPreloadSlice from "./isPreload/slice";
 import dropDownModeSlice from "./dropDownMode/slice";
 import threadSlice from "./threads/slice";
-import postModalSlice from "./postModal/slice";
+import modalSlice from "./modal/slice";
 import profileSlice from "./profile/slice";
 
 const store = configureStore({
@@ -14,7 +14,7 @@ const store = configureStore({
     dropDownMode: dropDownModeSlice,
     loadingBar: loadingBarReducer,
     threads: threadSlice,
-    postModal: postModalSlice,
+    modal: modalSlice,
     profile: profileSlice,
   },
 });

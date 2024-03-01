@@ -7,6 +7,25 @@
     "line body body"
     "commenter-photo interaction interaction";
 }
+.thread-comment-modal .comment-modal-container {
+  grid-template-columns: 1fr 18fr 2fr;
+  grid-template-areas:
+    "owner-photo author posting-time"
+    "line title title"
+    "line category category"
+    "line body body"
+    "commenter-photo comment-author comment-author"
+    "commenter-photo comment-body comment-body"
+    "commenter-photo footer button";
+}
+
+.thread-comment-modal .comment-container {
+  grid-template-columns: 1fr 18fr 2fr;
+  grid-template-areas:
+    "owner-photo author posting-time"
+    "owner-photo body body"
+    "owner-photo interaction interaction";
+}
 
 .start-thread-container {
   grid-template-columns: 1fr 18fr 2fr;
@@ -29,15 +48,6 @@
     "interaction interaction interaction";
 }
 
-.thread-detail .thread-container {
-  grid-template-columns: 1fr 18fr 2fr;
-  grid-template-areas:
-    "owner-photo author posting-time"
-    "title title title"
-    "category category category"
-    "body body body"
-    "interaction interaction interaction";
-}
 .thread-detail .comment-container {
   grid-template-columns: 1fr 18fr 2fr;
   grid-template-areas:
@@ -46,11 +56,13 @@
     "owner-photo interaction interaction";
 }
 
-.thread-owner-photo {
+.thread-owner-photo,
+.comment-owner-photo {
   grid-area: owner-photo;
 }
 
-.thread-author {
+.thread-author,
+.comment-author {
   grid-area: author;
 }
 
@@ -66,7 +78,8 @@
   grid-area: category;
 }
 
-.thread-body {
+.thread-body,
+.comment-body {
   grid-area: body;
 }
 
@@ -74,7 +87,8 @@
   grid-area: line;
 }
 
-.thread-interaction {
+.thread-interaction,
+.comment-interaction {
   grid-area: interaction;
 }
 
@@ -84,6 +98,13 @@
 
 .thread-post-button {
   grid-area: button;
+}
+
+.start-comment-author {
+  grid-area: comment-author;
+}
+.start-comment-body {
+  grid-area: comment-body;
 }
 
 @media (max-width: 768px) {

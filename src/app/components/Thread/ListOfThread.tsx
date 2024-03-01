@@ -5,7 +5,7 @@ import { ThreadInterface } from "@/app/states/threads/slice";
 import { usePathname } from "next/navigation";
 import useReduxSelector from "@/app/hooks/useReduxSelector";
 import { useAppDispatch } from "@/app/states/hooks";
-import openModal from "@/app/states/postModal/thunk";
+import { setPostModal } from "@/app/states/modal/slice";
 import ThreadLink from "./ThreadLink";
 
 export default function ListOfThread({
@@ -13,7 +13,7 @@ export default function ListOfThread({
 }: {
   threads: ThreadInterface[];
 }) {
-  const { authUser } = useReduxSelector();
+  const { authUser, postModal } = useReduxSelector();
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const id = pathname?.split("/").pop();
@@ -30,7 +30,7 @@ export default function ListOfThread({
           <button
             type="button"
             className="rounded-lg border px-5 py-2 text-sm font-semibold"
-            onClick={() => dispatch(openModal())}
+            onClick={() => dispatch(setPostModal(!postModal))}
           >
             Start your first thread
           </button>

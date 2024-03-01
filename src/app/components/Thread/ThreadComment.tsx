@@ -30,7 +30,16 @@ export default function ThreadComment({
   createdAt,
   upVotesBy,
   downVotesBy,
-}: ThreadCommentOwnerInterface & ThreadCommentsInterface) {
+  id,
+}: {
+  avatar: string;
+  name: string;
+  content: string;
+  createdAt: string;
+  upVotesBy: string[];
+  downVotesBy: string[];
+  id: string;
+}) {
   const { authUser } = useReduxSelector();
   const dispatch = useAppDispatch();
 
@@ -68,9 +77,9 @@ export default function ThreadComment({
     // }
   };
   return (
-    <div className="comment-container grid border-t p-3 text-[15px]">
-      <div className="thread-owner-photo -mt-14 mr-4 flex self-start md:mt-1">
-        <div id="avatar-start-thread" className="w-[36px] ">
+    <div className="comment-container grid border-t p-3 text-[15px]" id={id}>
+      <div className="comment-owner-photo -mt-14 mr-4 flex self-start md:mt-1">
+        <div id="avatar-start-comment" className="w-[36px] ">
           <Image
             src={avatar}
             alt="profile"
@@ -80,16 +89,16 @@ export default function ThreadComment({
           />
         </div>
       </div>
-      <div className="thread-author flex items-center">
+      <div className="comment-author flex items-center">
         <p className="font-semibold">{name}</p>
       </div>
-      <div className="thread-posting-time flex items-center">
+      <div className="comment-posting-time flex items-center">
         <p className="text-[#ababab]">{getTimeDifference(createdAt)}</p>
       </div>
-      <div className="thread-body">
+      <div className="comment-body">
         <div>{parse(content)}</div>
       </div>
-      <div className="thread-interaction flex items-center gap-x-4">
+      <div className="comment-interaction flex items-center gap-x-4">
         <div className="likes-interaction flex items-center">
           <ThreadButton onClick={onLikeHandler}>
             <IoHeartOutline />

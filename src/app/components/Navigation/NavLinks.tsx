@@ -12,17 +12,14 @@ import {
 } from "react-icons/io5";
 import { useAppDispatch } from "@/app/states/hooks";
 import useReduxSelector from "@/app/hooks/useReduxSelector";
-import openModal from "@/app/states/postModal/thunk";
 import { usePathname } from "next/navigation";
+import { setPostModal } from "@/app/states/modal/slice";
 import NavLink from "./NavLink";
 import NavButton from "./NavButton";
 
 export default function NavLinks() {
-  const { authUser } = useReduxSelector();
+  const { authUser, postModal } = useReduxSelector();
   const dispatch = useAppDispatch();
-  const onOpenModalHandler = () => {
-    dispatch(openModal());
-  };
   const pathname = usePathname();
   return (
     <>
@@ -32,7 +29,7 @@ export default function NavLinks() {
       <NavLink href="/search">
         {pathname === "/search" ? <IoSearch /> : <IoSearchOutline />}
       </NavLink>
-      <NavButton onClick={onOpenModalHandler}>
+      <NavButton onClick={() => dispatch(setPostModal(!postModal))}>
         <IoCreateOutline />
       </NavButton>
       <NavLink href="/activity">

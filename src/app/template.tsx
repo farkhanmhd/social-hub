@@ -40,6 +40,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <>
       {postModal && <StartThreadModal />}
+
       {!disableNavbar.includes(pathname) && <Header />}
       <Loading />
       <div
