@@ -1,4 +1,4 @@
-import { putAccessToken, login, getOwnProfile } from "@/app/api/api";
+import { putAccessToken, login, getOwnProfile, register } from "@/app/api/api";
 import { AppDispatch } from "@/app/states/index";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 import { setAuthUser } from "./slice";
@@ -33,4 +33,23 @@ function asyncUnsetAuthUser() {
   };
 }
 
-export { asyncSetAuthUser, asyncUnsetAuthUser };
+function asyncRegister({
+  name,
+  email,
+  password,
+}: {
+  name: string;
+  email: string;
+  password: string;
+}) {
+  return async () => {
+    try {
+      const response = await register({ name, email, password });
+      return { status: response.status, message: response.message };
+    } catch (error) {
+      return { status: "error", message: error };
+    }
+  };
+}
+
+export { asyncSetAuthUser, asyncUnsetAuthUser, asyncRegister };

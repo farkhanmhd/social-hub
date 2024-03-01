@@ -51,14 +51,10 @@ async function register({
   const { status, message } = responseJson;
 
   if (status !== "success") {
-    throw new Error(message);
+    return { status, message };
   }
 
-  const {
-    data: { user },
-  } = responseJson;
-
-  return user;
+  return { status, message };
 }
 
 async function login({ email, password }: { email: string; password: string }) {
