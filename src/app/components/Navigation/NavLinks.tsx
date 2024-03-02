@@ -13,7 +13,7 @@ import {
 import { useAppDispatch } from "@/app/states/hooks";
 import useReduxSelector from "@/app/hooks/useReduxSelector";
 import { usePathname } from "next/navigation";
-import { setPostModal } from "@/app/states/modal/slice";
+import { setPostModal } from "@/app/states/commentModal/slice";
 import NavLink from "./NavLink";
 import NavButton from "./NavButton";
 

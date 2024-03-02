@@ -44,7 +44,7 @@ function asyncSetThread() {
 
       dispatch(setThreads(threadsWithOwners));
     } catch {
-      alert(error);
+      dispatch(setThreads([]));
     }
   };
 }

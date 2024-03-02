@@ -4,9 +4,10 @@ import authUserSlice from "./authUser/slice";
 import isPreloadSlice from "./isPreload/slice";
 import dropDownModeSlice from "./dropDownMode/slice";
 import threadSlice from "./threads/slice";
-import modalSlice from "./modal/slice";
+import modalSlice from "./commentModal/slice";
 import profileSlice from "./profile/slice";
 import commentModalStateSlice from "./commentStates/slice";
+import leaderboardSlice from "./leaderboard/slice";
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     modal: modalSlice.reducer,
     profile: profileSlice.reducer,
     commentModalState: commentModalStateSlice.reducer,
+    leaderboard: leaderboardSlice.reducer,
   },
 });
 

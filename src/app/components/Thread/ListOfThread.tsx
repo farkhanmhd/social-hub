@@ -5,7 +5,7 @@ import { ThreadInterface } from "@/app/states/threads/slice";
 import { usePathname } from "next/navigation";
 import useReduxSelector from "@/app/hooks/useReduxSelector";
 import { useAppDispatch } from "@/app/states/hooks";
-import { setPostModal } from "@/app/states/modal/slice";
+import { setPostModal } from "@/app/states/commentModal/slice";
 import ThreadLink from "./ThreadLink";
 
 export default function ListOfThread({

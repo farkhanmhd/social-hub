@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import useClickOutside from "@/app/hooks/useClickOutside";
 import { useAppDispatch } from "@/app/states/hooks";
-import { setCommentModal } from "@/app/states/modal/slice";
+import { setCommentModal } from "@/app/states/commentModal/slice";
 import useReduxSelector from "@/app/hooks/useReduxSelector";
 import { ThreadInterface } from "@/app/states/threads/slice";
 import Image from "next/image";

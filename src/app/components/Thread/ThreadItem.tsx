@@ -19,7 +19,7 @@ import {
   asyncNeutralizeThreadLike,
 } from "@/app/states/threads/thunk";
 import { useAppDispatch } from "@/app/states/hooks";
-import { setCommentModal } from "@/app/states/modal/slice";
+import { setCommentModal } from "@/app/states/commentModal/slice";
 import { setCommentModalStates } from "@/app/states/commentStates/slice";
 import Link from "next/link";
 import ThreadButton from "./ThreadButton";
@@ -75,7 +75,7 @@ export default function ThreadItem({
   };
 
   return (
-    <div className="thread-container grid gap-1 p-3 text-[15px]">
+    <div className="thread-container grid gap-1 p-3 text-[15px] ">
       <div className="thread-owner-photo flex items-center">
         <div id="avatar-start-thread" className="w-[36px]">
           <Link href={`/${threadItemProps?.ownerId}`}>

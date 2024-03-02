@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import { useAppDispatch } from "@/app/states/hooks";
-import { setPostModal } from "@/app/states/modal/slice";
+import { setPostModal } from "@/app/states/commentModal/slice";
 import useReduxSelector from "@/app/hooks/useReduxSelector";
 import useClickOutside from "@/app/hooks/useClickOutside";
 import useInput from "@/app/hooks/useInput";

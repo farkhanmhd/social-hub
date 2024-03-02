@@ -5,7 +5,7 @@ import Image from "next/image";
 import useReduxSelector from "@/app/hooks/useReduxSelector";
 import Link from "next/link";
 import { useAppDispatch } from "@/app/states/hooks";
-import { setPostModal } from "@/app/states/modal/slice";
+import { setPostModal } from "@/app/states/commentModal/slice";
 
 export default function StartThread() {
   const dispatch = useAppDispatch();
