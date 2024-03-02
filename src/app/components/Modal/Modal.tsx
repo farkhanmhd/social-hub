@@ -13,7 +13,7 @@ const Modal = forwardRef<HTMLDivElement, ModalInterface>(
     >
       <div
         id="default-modal"
-        className="h-[136px] w-[512px] rounded-2xl bg-white p-5 "
+        className="mx-5 h-[136px] w-[512px] rounded-2xl bg-white p-5"
         ref={ref}
       >
         <h1 className="text-xl font-semibold">{title}</h1>

@@ -29,8 +29,8 @@ export default function LoginPage() {
       asyncSetAuthUser({ email, password }),
     );
     setOpenModal(true);
+    setModalMessage(`${message}`);
     if (status === "success") {
-      setModalMessage(`${message}`);
       setTimeout(() => {
         push("/");
       }, 2000);
