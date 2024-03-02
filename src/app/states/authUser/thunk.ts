@@ -18,11 +18,13 @@ function asyncSetAuthUser({
       dispatch(setAuthUser({ email, password }));
       const authUser = await getOwnProfile();
       dispatch(setAuthUser(authUser));
-    } catch (err) {
-      // gotta change this
-      JSON.stringify(err);
+      dispatch(hideLoading());
+      return { status: "success", message: "Login success" };
+    } catch (error) {
+      dispatch(setAuthUser(null));
+      dispatch(hideLoading());
+      return { status: "error", message: error };
     }
-    dispatch(hideLoading());
   };
 }
 

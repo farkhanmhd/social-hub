@@ -26,16 +26,15 @@ export default function RegisterPage() {
 
   const onRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    const register = await dispatch(asyncRegister({ name, email, password }));
-    if (register.status === "success") {
-      setOpenModal(true);
-      setModalMessage(register.message);
+    const { status, message } = await dispatch(
+      asyncRegister({ name, email, password }),
+    );
+    setOpenModal(true);
+    setModalMessage(message);
+    if (status === "success") {
       setTimeout(() => {
         push("/login");
       }, 2000);
-    } else {
-      setOpenModal(true);
-      setModalMessage(register.message);
     }
   };
 

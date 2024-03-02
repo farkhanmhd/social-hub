@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useAppDispatch } from "@/app/states/hooks";
 import { asyncUnsetAuthUser } from "@/app/states/authUser/thunk";
+import { setThreads } from "@/app/states/threads/slice";
 import { setDropDownMode } from "@/app/states/dropDownMode/slice";
 import {
   IoBarChart,
@@ -21,6 +22,7 @@ export default function MainDropdownItems({
     dispatch(setDropDownMode(mode));
   };
   const onLogout = () => {
+    dispatch(setThreads([]));
     dispatch(asyncUnsetAuthUser());
   };
 

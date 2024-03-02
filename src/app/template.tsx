@@ -12,7 +12,7 @@ import StartThreadModal from "./components/Thread/StartThreadModal";
 import StartCommentModal from "./components/Thread/StartCommentModal";
 
 export default function Template({ children }: { children: React.ReactNode }) {
-  const disableNavbar = ["/login", "/register"];
+  const disableNavbarPath = ["/login", "/register"];
   const pathname = usePathname();
   const { authUser, isPreload, postModal, commentModal, commentModalState } =
     useReduxSelector();
@@ -37,6 +37,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
     }
   }, [authUser, pathname, push, isPreload]);
 
+  const checkPath = ["/", "/search", "/activity", `/${authUser?.id}`];
+
+  if (authUser === null && checkPath.includes(pathname)) return null;
+
   if (isPreload) return null;
 
   return (
@@ -45,17 +49,17 @@ export default function Template({ children }: { children: React.ReactNode }) {
       {commentModal && (
         <StartCommentModal threadItemProps={commentModalState} />
       )}
-      {!disableNavbar.includes(pathname) && <Header />}
+      {!disableNavbarPath.includes(pathname) && <Header />}
       <Loading />
       <div
         id="content"
-        className={`${disableNavbar.includes(pathname) ? "mt-0" : "mt-[74px]"}  min-h-[calc(100vh-74px)]`}
+        className={`${disableNavbarPath.includes(pathname) ? "mt-0" : "mt-[74px]"}  min-h-[calc(100vh-74px)]`}
       >
         <main className="min-h-[calc(100vh-74px)] w-full max-w-7xl px-0 pb-[50px] md:mx-auto md:px-10 md:pb-0">
           {children}
         </main>
       </div>
-      {!disableNavbar.includes(pathname) && <NavBottom />}
+      {!disableNavbarPath.includes(pathname) && <NavBottom />}
     </>
   );
 }
