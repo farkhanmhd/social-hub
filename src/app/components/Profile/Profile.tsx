@@ -9,10 +9,7 @@ export default function Profile({
   avatar: string;
 }) {
   return (
-    <div
-      id="profile"
-      className="flex flex-grow-0 items-center justify-between p-3"
-    >
+    <div id="profile" className="flex flex-grow-0 items-center justify-between">
       <div className="profile-detail">
         <h1 className="text-2xl font-semibold">{name}</h1>
       </div>

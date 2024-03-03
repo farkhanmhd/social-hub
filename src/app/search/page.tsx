@@ -49,7 +49,7 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="mt-20 h-[60px] w-full">
+    <div className="mt-20 h-[60px] w-full px-5 md:px-0">
       <label htmlFor="search" className="relative block h-full w-full">
         <IoSearch className="absolute top-1/2 z-[999] ml-5 -translate-y-1/2 text-[#A0A0A0]" />
         {}
@@ -62,16 +62,18 @@ export default function SearchPage() {
           onChange={(e) => onSearchChange(e)}
         />
       </label>
-      <ul id="all-users-container" className="mt-10 flex flex-col gap-y-2">
+      <ul id="all-users-container" className="mt-10 flex flex-col gap-y-5">
         {allUsers
           .filter((user) =>
             user.name.toLowerCase().includes(searchValue.toLowerCase()),
           )
           .slice(0, usersLimit)
           .map((user) => (
-            <li className="rounded-lg duration-200 hover:shadow-md">
+            <li className="rounded-lg duration-200 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
               <Link href={`/${user.id}`}>
-                <Profile name={user.name} avatar={user.avatar} />
+                <div className="p-3">
+                  <Profile name={user.name} avatar={user.avatar} />
+                </div>
               </Link>
             </li>
           ))}
