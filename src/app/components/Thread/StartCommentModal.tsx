@@ -7,7 +7,7 @@ import { ThreadInterface } from "@/app/states/threads/slice";
 import Image from "next/image";
 import { getTimeDifference } from "@/app/utils/util";
 import parse from "html-react-parser";
-import { asyncAddComment } from "@/app/states/threads/thunk";
+import { asyncAddComment, asyncSetThread } from "@/app/states/threads/thunk";
 import ContentEditable, { ContentEditableEvent } from "react-contenteditable";
 import { useRouter } from "next/navigation";
 
@@ -42,6 +42,7 @@ export default function StartCommentModal({
   const onAddComment = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(asyncAddComment(threadItemProps.id, commentValue, authUser));
+    dispatch(asyncSetThread());
     dispatch(setCommentModal(false));
     setCommentValue("");
     if (commentContentEl) {
@@ -51,7 +52,7 @@ export default function StartCommentModal({
   };
 
   return (
-    <div className="thread-comment-modal fixed left-0 top-0 z-[9999] flex h-screen w-screen flex-col items-center justify-center bg-black/50">
+    <div className="thread-comment-modal fixed left-0 top-0 z-[99999] flex h-screen w-screen flex-col items-center justify-center bg-black/50">
       <div
         id="comment-modal-cotainer"
         className="comment-modal-container grid h-screen w-screen gap-1 rounded-lg bg-white p-3 text-[13px] sm:text-[15px] md:h-auto md:max-w-[620px]"

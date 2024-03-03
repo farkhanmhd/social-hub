@@ -67,7 +67,7 @@ export default function StartThreadModal() {
   return (
     <div
       id="start-thread-modal"
-      className="fixed top-0 z-[9999] flex h-screen w-screen flex-col items-center justify-center gap-y-5 bg-black/70"
+      className="fixed top-0 z-[99999] flex h-screen w-screen flex-col items-center justify-center gap-y-5 bg-black/70"
     >
       <h2
         id="new-thread-outside"
@@ -126,7 +126,6 @@ export default function StartThreadModal() {
             placeholder="Category"
             value={category.length > 20 ? category.slice(0, 20) : category}
             onChange={onCategoryChange}
-            required
           />
         </div>
         <div className="thread-body ml-2 py-2">

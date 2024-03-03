@@ -48,7 +48,7 @@ export default function HomePage() {
       <StartThread />
       <div
         id="categories-container"
-        className="flex items-center justify-end gap-x-5"
+        className="flex items-center justify-between gap-x-5 sm:justify-end"
       >
         <h2 className="ml-4 font-semibold">Filter Threads by Category</h2>
         <select

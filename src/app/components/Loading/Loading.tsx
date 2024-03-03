@@ -5,7 +5,7 @@ function Loading() {
   return (
     <div id="loading">
       <LoadingBar
-        className="fixed top-0 z-[999] h-[5px] bg-blue-500"
+        className="fixed top-0 z-[99999] h-[5px] bg-blue-500"
         showFastActions
       />
     </div>

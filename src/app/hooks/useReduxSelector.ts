@@ -10,6 +10,7 @@ function useReduxSelector() {
   const commentModal = useAppSelector((state) => state.modal.commentModal);
   const commentModalState = useAppSelector((state) => state.commentModalState);
   const leaderboard = useAppSelector((state) => state.leaderboard);
+  const allUsers = useAppSelector((state) => state.allUsers);
 
   return {
     authUser,
@@ -21,6 +22,7 @@ function useReduxSelector() {
     commentModal,
     commentModalState,
     leaderboard,
+    allUsers,
   };
 }
 
