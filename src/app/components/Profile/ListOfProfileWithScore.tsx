@@ -12,7 +12,7 @@ export default function ListOfProfileWithScore({
     <div id="leaderboard">
       <ul id="leaderboard-container" className="flex flex-col gap-y-2">
         {leaderboard.map((user: LeaderboardInterface) => (
-          <li>
+          <li className="mx-5">
             <Link href={`/${user.user.id}`}>
               <ProfileWithScore
                 key={user.user.id}

@@ -18,8 +18,8 @@ export default function LeaderboardPage() {
         Top 10 SocialHub Users
       </h1>
       <div className="flex justify-between px-3 font-semibold">
-        <h1 className="ml-[70px]">Name</h1>
-        <h1>Score</h1>
+        <h1 className="ml-[87px]">Name</h1>
+        <h1 className="mr-5">Score</h1>
       </div>
       <ListOfProfileWithScore leaderboard={leaderboard} />
     </div>

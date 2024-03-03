@@ -32,7 +32,9 @@ export default function ProfilePage() {
 
   return (
     <>
-      <Profile name={profile.name} avatar={profile.avatar} />
+      <div className="mx-3">
+        <Profile name={profile.name} avatar={profile.avatar} />
+      </div>
       <div className="flex h-full w-full flex-grow">
         <ListOfThread threads={filteredThreads} />
       </div>
