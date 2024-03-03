@@ -19,12 +19,14 @@ export default function ListOfThread({
   const id = pathname?.split("/").pop();
   return (
     <>
-      <ul>
-        {threads.length > 0 &&
-          threads.map((thread: ThreadInterface) => (
-            <ThreadLink key={thread.id} threadWithOwner={thread} />
-          ))}
-      </ul>
+      {threads.length > 0 && (
+        <ul className="flex-grow">
+          {threads.length > 0 &&
+            threads.map((thread: ThreadInterface) => (
+              <ThreadLink key={thread.id} threadWithOwner={thread} />
+            ))}
+        </ul>
+      )}
       {id === authUser?.id && threads.length === 0 && (
         <div className="flex flex-grow items-center justify-center">
           <button
