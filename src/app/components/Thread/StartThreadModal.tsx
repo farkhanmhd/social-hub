@@ -56,7 +56,11 @@ export default function StartThreadModal() {
     e.preventDefault();
     dispatch(asyncAddThread({ ...submittedThread }, { title, category, body }));
     dispatch(setPostModal(false));
-    if (pathname === "/" || pathname === "/search") {
+    if (
+      pathname === "/search" ||
+      pathname === "/activity" ||
+      pathname === "/leaderboard"
+    ) {
       push("/");
     }
     setTitle("");
