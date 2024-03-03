@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { useAppDispatch } from "@/app/states/hooks";
 import { setPostModal } from "@/app/states/commentModal/slice";
@@ -10,9 +10,12 @@ import useInput from "@/app/hooks/useInput";
 import { asyncAddThread } from "@/app/states/threads/thunk";
 import { ThreadInterface } from "@/app/states/threads/slice";
 import { useRouter, usePathname } from "next/navigation";
+import ImageUploading from "react-images-uploading";
+import { IoImageOutline } from "react-icons/io5";
 
 export default function StartThreadModal() {
   const { authUser } = useReduxSelector();
+  const [images, setImages] = useState<any[]>([]);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const {
@@ -37,6 +40,10 @@ export default function StartThreadModal() {
     dispatch(setPostModal(false));
   });
 
+  const onImageChange = (imageList: any) => {
+    setImages(imageList);
+  };
+
   const submittedThread: ThreadInterface = {
     id: "",
     title,
@@ -54,7 +61,19 @@ export default function StartThreadModal() {
 
   const onAddThread = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(asyncAddThread({ ...submittedThread }, { title, category, body }));
+    const imagesHtml = images
+      .map(
+        (image) =>
+          `<img src="${image.dataURL}" alt="uploaded image" class="rounded-lg mb-3" />`,
+      )
+      .join("");
+    const updatedBody = `<div><div>${body}</div> <br> ${imagesHtml}</div>`;
+    dispatch(
+      asyncAddThread(
+        { ...submittedThread, body: updatedBody, category },
+        { title, body: updatedBody, category },
+      ),
+    );
     dispatch(setPostModal(false));
     if (
       pathname === "/search" ||
@@ -80,7 +99,7 @@ export default function StartThreadModal() {
         New thread
       </h2>
       <form
-        className="start-thread-container grid h-screen w-screen gap-1 rounded-lg bg-white p-3 text-[13px] sm:text-[15px] md:h-auto md:max-w-[620px]"
+        className="start-thread-container grid h-screen w-screen gap-1 rounded-lg bg-white p-3 text-[13px] sm:text-[15px] md:h-auto md:max-h-[800px] md:max-w-[620px]"
         ref={modalRef}
         onSubmit={(e) => onAddThread(e)}
       >
@@ -132,7 +151,7 @@ export default function StartThreadModal() {
             onChange={onCategoryChange}
           />
         </div>
-        <div className="thread-body ml-2 py-2">
+        <div className="thread-body relative ml-2 py-2">
           <textarea
             name="thread-body"
             id="thread-body"
@@ -142,6 +161,18 @@ export default function StartThreadModal() {
             onChange={onBodyChange}
             required
           />
+          <div className="absolute bottom-0 flex items-center gap-x-2">
+            {images.map((image) => (
+              <div key={image.dataURL}>
+                <Image
+                  src={image.dataURL}
+                  alt="image"
+                  width={100}
+                  height={100}
+                />
+              </div>
+            ))}
+          </div>
         </div>
         <div className="thread-line mx-auto mt-2 h-full w-[2px] bg-[#ababab]" />
         <div className="thread-commenter-photos mt-2 flex content-center items-center justify-center">
@@ -155,7 +186,23 @@ export default function StartThreadModal() {
             />
           </div>
         </div>
-        <div className="thread-post-button">
+        <div className="thread-post-button flex items-center justify-end gap-x-3">
+          <div className="image-uploading-section">
+            <ImageUploading multiple value={images} onChange={onImageChange}>
+              {({ onImageUpload }) => (
+                <div>
+                  <button
+                    onClick={onImageUpload}
+                    type="button"
+                    className="rounded-full  px-4 py-[6px] text-2xl font-medium text-[#b1b1b1]"
+                  >
+                    <IoImageOutline />
+                    {}
+                  </button>
+                </div>
+              )}
+            </ImageUploading>
+          </div>
           <button
             type="submit"
             className={`h-[36px] w-16 ${body.length === 0 ? "cursor-not-allowed bg-[#b1b1b1]" : "cursor-pointer bg-black"}  rounded-full  px-4 py-[6px] font-medium text-white`}

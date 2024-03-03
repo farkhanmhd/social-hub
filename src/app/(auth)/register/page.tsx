@@ -8,7 +8,7 @@ import { useAppDispatch } from "@/app/states/hooks";
 import { asyncRegister } from "@/app/states/authUser/thunk";
 import { useRouter } from "next/navigation";
 import useClickOutside from "@/app/hooks/useClickOutside";
-import Modal from "@/app/components/Modal/Modal";
+import Modal from "@/app/components/CommonModal/Modal";
 
 export default function RegisterPage() {
   const { value: name, onChange: setName } = useInput("");

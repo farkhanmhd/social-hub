@@ -25,7 +25,7 @@ export default function ProfilePage() {
     dispatch(asyncSetThread());
     const intervalID = setInterval(() => {
       dispatch(asyncSetThread());
-    }, 10000);
+    }, 60000);
 
     return () => clearInterval(intervalID);
   }, [dispatch, id]);

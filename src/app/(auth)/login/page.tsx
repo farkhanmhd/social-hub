@@ -7,7 +7,7 @@ import FormInput from "@/app/components/Form/FormInput";
 import useInput from "@/app/hooks/useInput";
 import { useAppDispatch } from "@/app/states/hooks";
 import { asyncSetAuthUser } from "@/app/states/authUser/thunk";
-import Modal from "@/app/components/Modal/Modal";
+import Modal from "@/app/components/CommonModal/Modal";
 import useClickOutside from "@/app/hooks/useClickOutside";
 
 export default function LoginPage() {
