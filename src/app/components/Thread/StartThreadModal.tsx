@@ -69,10 +69,7 @@ export default function StartThreadModal() {
       .join("");
     const updatedBody = `<div><div>${body}</div> <br> ${imagesHtml}</div>`;
     dispatch(
-      asyncAddThread(
-        { ...submittedThread, body: updatedBody, category },
-        { title, body: updatedBody, category },
-      ),
+      asyncAddThread({ ...submittedThread, body: updatedBody, category }),
     );
     dispatch(setPostModal(false));
     if (
@@ -169,6 +166,7 @@ export default function StartThreadModal() {
                   alt="image"
                   width={100}
                   height={100}
+                  className="rounded-lg"
                 />
               </div>
             ))}

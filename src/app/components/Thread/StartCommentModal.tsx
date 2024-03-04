@@ -10,6 +10,8 @@ import parse from "html-react-parser";
 import { asyncAddComment, asyncSetThread } from "@/app/states/threads/thunk";
 import ContentEditable, { ContentEditableEvent } from "react-contenteditable";
 import { useRouter } from "next/navigation";
+import ImageUploading from "react-images-uploading";
+import { IoImageOutline } from "react-icons/io5";
 
 export default function StartCommentModal({
   threadItemProps,
@@ -19,6 +21,7 @@ export default function StartCommentModal({
   const { authUser } = useReduxSelector();
   const dispatch = useAppDispatch();
   const modalRef = useRef<HTMLDivElement>(null);
+  const [images, setImages] = useState<any[]>([]);
   const [commentValue, setCommentValue] = useState("");
   const commentContentEl = document.querySelector(".start-comment-content");
   const { push } = useRouter();
@@ -41,7 +44,16 @@ export default function StartCommentModal({
 
   const onAddComment = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(asyncAddComment(threadItemProps.id, commentValue, authUser));
+    const imagesHtml = images
+      .map(
+        (image) =>
+          `<img src="${image.dataURL}" alt="uploaded image" class="rounded-lg mb-3" />`,
+      )
+      .join("");
+    const updatedCommentValue = `<div><div>${commentValue}</div> <br> ${imagesHtml}</div>`;
+    dispatch(
+      asyncAddComment(threadItemProps.id, updatedCommentValue, authUser),
+    );
     dispatch(asyncSetThread());
     dispatch(setCommentModal(false));
     setCommentValue("");
@@ -51,11 +63,15 @@ export default function StartCommentModal({
     push(`/${threadItemProps.ownerId}/post/${threadItemProps.id}`);
   };
 
+  const onImageChange = (imageList: any) => {
+    setImages(imageList);
+  };
+
   return (
     <div className="thread-comment-modal fixed left-0 top-0 z-[99999] flex h-screen w-screen flex-col items-center justify-center bg-black/50">
       <div
         id="comment-modal-cotainer"
-        className="comment-modal-container grid h-screen w-screen gap-1 rounded-lg bg-white p-3 text-[13px] sm:text-[15px] md:h-auto md:max-w-[620px]"
+        className="comment-modal-container grid min-h-screen w-screen gap-1 overflow-auto rounded-lg bg-white p-3 text-[13px] sm:text-[15px] md:max-h-[800px] md:min-h-[800px] md:max-w-[620px]"
         ref={modalRef}
       >
         <div className="thread-cancel-button mb-8">
@@ -120,19 +136,49 @@ export default function StartCommentModal({
         <div className="start-comment-author ml-1 mt-3 flex items-center">
           <p className="font-semibold">{authUser?.name}</p>
         </div>
-        <div className="start-comment-body overflow-none -mt-1 ml-1">
+        <div className="start-comment-body overflow-none relative -mt-1 ml-1">
           <ContentEditable
             onChange={onCommentChange}
             html={commentValue}
             data-placeholder={`Reply to ${threadItemProps.ownerName}...`}
             className="start-comment-content overflow-none relative w-full cursor-text resize-none text-wrap font-light empty:before:text-gray-400 empty:before:content-[attr(data-placeholder)] focus:outline-none"
           />
+          <div className=" mt-3 flex items-center gap-x-2">
+            {images.map((image) => (
+              <div key={image.dataURL}>
+                <Image
+                  src={image.dataURL}
+                  alt="image"
+                  width={100}
+                  height={100}
+                  className="rounded-lg"
+                />
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="thread-post-button">
+        <div className="thread-post-button flex items-center justify-end gap-x-3">
+          <div className="image-uploading-section">
+            <ImageUploading multiple value={images} onChange={onImageChange}>
+              {({ onImageUpload }) => (
+                <div>
+                  <button
+                    onClick={onImageUpload}
+                    type="button"
+                    className="rounded-full  px-4 py-[6px] text-2xl font-medium text-[#b1b1b1]"
+                  >
+                    <IoImageOutline />
+                    {}
+                  </button>
+                </div>
+              )}
+            </ImageUploading>
+          </div>
           <button
-            type="button"
-            className={`h-[36px] w-16 ${commentValue === "" || commentValue === "<br>" ? "cursor-not-allowed bg-[#b1b1b1]" : "cursor-pointer bg-black"}  rounded-full  px-4 py-[6px] font-medium text-white`}
-            onClick={(e) => onAddComment(e)}
+            type="submit"
+            className={`h-[36px] w-16 ${commentValue.length === 0 ? "cursor-not-allowed bg-[#b1b1b1]" : "cursor-pointer bg-black"}  rounded-full  px-4 py-[6px] font-medium text-white`}
+            disabled={commentValue.length === 0}
+            onClick={onAddComment}
           >
             Post
           </button>

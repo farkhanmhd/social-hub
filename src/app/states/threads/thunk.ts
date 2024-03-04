@@ -49,11 +49,9 @@ function asyncSetThread() {
   };
 }
 
-function asyncAddThread(
-  newThread: ThreadInterface,
-  { title, body, category }: { title: string; body: string; category: string },
-) {
+function asyncAddThread(newThread: ThreadInterface) {
   return async (dispatch: AppDispatch) => {
+    const { title, body, category } = newThread;
     dispatch(showLoading());
     dispatch(addNewThread(newThread));
     try {
