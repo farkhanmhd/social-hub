@@ -18,7 +18,9 @@ export default function RootLayout({
     <React.StrictMode>
       <Provider store={store}>
         <html lang="en">
-          <body className={inter.className}>{children}</body>
+          <body className={`${inter.className} dark:bg-black dark:text-white`}>
+            {children}
+          </body>
         </html>
       </Provider>
     </React.StrictMode>

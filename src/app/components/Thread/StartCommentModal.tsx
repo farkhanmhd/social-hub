@@ -18,7 +18,7 @@ export default function StartCommentModal({
 }: {
   threadItemProps: ThreadInterface;
 }) {
-  const { authUser } = useReduxSelector();
+  const { authUser, language } = useReduxSelector();
   const dispatch = useAppDispatch();
   const modalRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<any[]>([]);
@@ -71,13 +71,13 @@ export default function StartCommentModal({
     <div className="thread-comment-modal fixed left-0 top-0 z-[99999] flex h-screen w-screen flex-col items-center justify-center bg-black/50">
       <div
         id="comment-modal-cotainer"
-        className="comment-modal-container grid min-h-screen w-screen gap-1 overflow-auto rounded-lg bg-white p-3 text-[13px] sm:text-[15px] md:max-h-[800px] md:min-h-[800px] md:max-w-[620px]"
+        className="comment-modal-container grid min-h-screen w-screen gap-1 overflow-auto rounded-lg bg-white p-3 text-[13px] dark:border dark:bg-black sm:text-[15px] md:max-h-[800px] md:min-h-[800px] md:max-w-[620px]"
         ref={modalRef}
       >
         <div className="thread-cancel-button mb-8">
           <button
             type="submit"
-            className="text-black md:hidden"
+            className=" md:hidden"
             onClick={() => dispatch(setCommentModal(false))}
           >
             Cancel
@@ -113,8 +113,8 @@ export default function StartCommentModal({
             #{threadItemProps?.category}
           </button>
         </div>
-        <div className="thread-posting-time flex items-center">
-          <p className="text-[#ababab]">
+        <div className="thread-posting-time flex items-center justify-end ">
+          <p className="mr-3 text-[#ababab]">
             {getTimeDifference(threadItemProps?.createdAt)}
           </p>
         </div>
@@ -140,7 +140,7 @@ export default function StartCommentModal({
           <ContentEditable
             onChange={onCommentChange}
             html={commentValue}
-            data-placeholder={`Reply to ${threadItemProps.ownerName}...`}
+            data-placeholder={`${language === "en" ? "Reply to " : "Balas ke "} ${threadItemProps.ownerName}...`}
             className="start-comment-content overflow-none relative w-full cursor-text resize-none text-wrap font-light empty:before:text-gray-400 empty:before:content-[attr(data-placeholder)] focus:outline-none"
           />
           <div className=" mt-3 flex items-center gap-x-2">
@@ -176,7 +176,7 @@ export default function StartCommentModal({
           </div>
           <button
             type="submit"
-            className={`h-[36px] w-16 ${commentValue.length === 0 ? "cursor-not-allowed bg-[#b1b1b1]" : "cursor-pointer bg-black"}  rounded-full  px-4 py-[6px] font-medium text-white`}
+            className={`h-[36px] w-16 ${commentValue.length === 0 ? "cursor-not-allowed bg-[#b1b1b1]" : "cursor-pointer bg-black"}  rounded-full  px-4 py-[6px] font-medium text-white dark:border`}
             disabled={commentValue.length === 0}
             onClick={onAddComment}
           >

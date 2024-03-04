@@ -9,6 +9,8 @@ import profileSlice from "./profile/slice";
 import commentModalStateSlice from "./commentStates/slice";
 import leaderboardSlice from "./leaderboard/slice";
 import allUsersSlice from "./allUsers/slice";
+import languageSlice from "./language/slice";
+import themeSlice from "./theme/slice";
 
 const store = configureStore({
   reducer: {
@@ -22,6 +24,8 @@ const store = configureStore({
     commentModalState: commentModalStateSlice.reducer,
     leaderboard: leaderboardSlice.reducer,
     allUsers: allUsersSlice.reducer,
+    language: languageSlice.reducer,
+    theme: themeSlice.reducer,
   },
 });
 

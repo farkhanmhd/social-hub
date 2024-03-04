@@ -13,7 +13,7 @@ export default function ListOfThread({
 }: {
   threads: ThreadInterface[];
 }) {
-  const { authUser, postModal } = useReduxSelector();
+  const { authUser, postModal, language } = useReduxSelector();
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const id = pathname?.split("/").pop();
@@ -34,13 +34,15 @@ export default function ListOfThread({
             className="rounded-lg border px-5 py-2 text-sm font-semibold"
             onClick={() => dispatch(setPostModal(!postModal))}
           >
-            Start your first thread
+            {language === "id" ? "Buat thread baru" : "Start your first thread"}
           </button>
         </div>
       )}
       {threads.length === 0 && id !== authUser?.id && (
         <div className="flex flex-grow items-center justify-center">
-          <h1 className="font-semibold">There are no threads</h1>
+          <h1 className="font-semibold">
+            {language === "id" ? "Tidak ada thread" : "There are no threads"}
+          </h1>
         </div>
       )}
     </>

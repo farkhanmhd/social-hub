@@ -7,7 +7,7 @@ import asyncReceiveLeaderboard from "../states/leaderboard/thunk";
 import { useAppDispatch } from "../states/hooks";
 
 export default function LeaderboardPage() {
-  const { leaderboard } = useReduxSelector();
+  const { leaderboard, language } = useReduxSelector();
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(asyncReceiveLeaderboard());
@@ -15,10 +15,12 @@ export default function LeaderboardPage() {
   return (
     <div>
       <h1 className="mb-5 bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text pt-5 text-center text-4xl font-semibold text-transparent">
-        Top 10 SocialHub Users
+        {language === "id"
+          ? "Top 10 Pengguna SocialHub"
+          : "Top 10 SocialHub Users"}
       </h1>
       <div className="flex justify-between px-3 font-semibold">
-        <h1 className="ml-[87px]">Name</h1>
+        <h1 className="ml-[87px]">{language === "id" ? "Nama" : "Name"}</h1>
         <h1 className="mr-5">Score</h1>
       </div>
       <ListOfProfileWithScore leaderboard={leaderboard} />

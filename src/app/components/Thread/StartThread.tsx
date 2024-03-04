@@ -9,7 +9,7 @@ import { setPostModal } from "@/app/states/commentModal/slice";
 
 export default function StartThread() {
   const dispatch = useAppDispatch();
-  const { authUser, postModal } = useReduxSelector();
+  const { authUser, postModal, language } = useReduxSelector();
   return (
     <div className="hidden h-[70px] items-center gap-2 border-b px-3 sm:flex">
       <div
@@ -31,7 +31,7 @@ export default function StartThread() {
         className="flex-[3] cursor-text pl-1 text-left text-[14px] font-light text-[#959494]"
         onClick={() => dispatch(setPostModal(!postModal))}
       >
-        Start a Thread...
+        {language === "id" ? "Buat thread baru..." : "Start a thread..."}
       </button>
       <button
         type="button"

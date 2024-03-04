@@ -11,6 +11,8 @@ function useReduxSelector() {
   const commentModalState = useAppSelector((state) => state.commentModalState);
   const leaderboard = useAppSelector((state) => state.leaderboard);
   const allUsers = useAppSelector((state) => state.allUsers);
+  const language = useAppSelector((state) => state.language);
+  const theme = useAppSelector((state) => state.theme);
 
   return {
     authUser,
@@ -23,6 +25,8 @@ function useReduxSelector() {
     commentModalState,
     leaderboard,
     allUsers,
+    language,
+    theme,
   };
 }
 

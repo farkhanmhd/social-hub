@@ -1,11 +1,12 @@
 import React from "react";
+import useReduxSelector from "@/app/hooks/useReduxSelector";
 import { useAppDispatch } from "@/app/states/hooks";
 import {
   IoArrowBackOutline,
   IoSunnyOutline,
   IoMoonOutline,
-  IoDesktopOutline,
 } from "react-icons/io5";
+import { setTheme } from "@/app/states/theme/slice";
 import { backToMainMenu } from "../../utils/util";
 
 export default function ThemeDropDownItems({
@@ -15,7 +16,22 @@ export default function ThemeDropDownItems({
 }) {
   const dispatch = useAppDispatch();
 
-  const switchTheme = () => {};
+  const setThemeLight = () => {
+    dispatch(setTheme("light"));
+    document.documentElement.classList.replace("dark", "light");
+    document.documentElement.classList.add("light");
+    localStorage.theme = "light";
+  };
+
+  const setThemeDark = () => {
+    dispatch(setTheme("dark"));
+    document.documentElement.classList.replace("light", "dark");
+    document.documentElement.classList.add("dark");
+    localStorage.theme = "dark";
+  };
+
+  const { language } = useReduxSelector();
+
   return (
     <>
       <li>
@@ -27,31 +43,23 @@ export default function ThemeDropDownItems({
           <span>
             <IoArrowBackOutline />
           </span>
-          <span>Back</span>
+          <span>{language === "en" ? "Back" : "Kembali"}</span>
         </button>
       </li>
       <li>
-        <button type="button" onClick={switchTheme} className={itemClass}>
+        <button type="button" onClick={setThemeLight} className={itemClass}>
           <span>
             <IoSunnyOutline />
           </span>
-          <span>Light</span>
+          <span>{language === "en" ? "Light" : "Terang"}</span>
         </button>
       </li>
       <li>
-        <button type="button" onClick={switchTheme} className={itemClass}>
+        <button type="button" onClick={setThemeDark} className={itemClass}>
           <span>
             <IoMoonOutline />
           </span>
-          <span>Dark</span>
-        </button>
-      </li>
-      <li>
-        <button type="button" onClick={switchTheme} className={itemClass}>
-          <span>
-            <IoDesktopOutline />
-          </span>
-          <span>System Default</span>
+          <span>{language === "en" ? "Dark" : "Gelap"}</span>
         </button>
       </li>
     </>

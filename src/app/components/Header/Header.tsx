@@ -31,7 +31,7 @@ export default function Header() {
   });
 
   return (
-    <header className="fixed top-0 z-[9999] flex h-[74px] w-screen  items-center text-[#959494] backdrop-blur-md dark:bg-[rgba(10,_10,_10,_.9)]">
+    <header className="fixed top-0 z-[9999] flex h-[74px] w-screen  items-center text-[#959494] backdrop-blur-md dark:bg-[rgba(0,_0,_0,_.9)]">
       <div
         id="header-contents"
         className="mx-auto flex h-full w-full max-w-[1280px] flex-row-reverse items-center px-5 sm:px-10 md:relative md:flex-row md:justify-between"

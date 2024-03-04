@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import useReduxSelector from "@/app/hooks/useReduxSelector";
 import { useAppDispatch } from "@/app/states/hooks";
 import { asyncUnsetAuthUser } from "@/app/states/authUser/thunk";
 import { setThreads } from "@/app/states/threads/slice";
@@ -17,10 +18,8 @@ export default function MainDropdownItems({
   itemClass: string;
 }) {
   const dispatch = useAppDispatch();
+  const { language } = useReduxSelector();
 
-  const switchDropdown = (mode: string) => {
-    dispatch(setDropDownMode(mode));
-  };
   const onLogout = () => {
     dispatch(setThreads([]));
     dispatch(asyncUnsetAuthUser());
@@ -39,13 +38,13 @@ export default function MainDropdownItems({
       <li>
         <button
           type="button"
-          onClick={() => switchDropdown("theme")}
+          onClick={() => dispatch(setDropDownMode("theme"))}
           className={itemClass}
         >
           <span>
             <IoDesktopOutline />
           </span>
-          <span>Switch Theme</span>
+          <span>{language === "id" ? "Tema" : "Theme"}</span>
         </button>
       </li>
       <li>
@@ -57,7 +56,7 @@ export default function MainDropdownItems({
           <span>
             <IoLanguage />
           </span>
-          <span>Change Language</span>
+          <span>{language === "id" ? "Bahasa" : "Language"}</span>
         </button>
       </li>
       <li>
@@ -65,7 +64,7 @@ export default function MainDropdownItems({
           <span>
             <IoLogOutOutline />
           </span>
-          <span>Logout</span>
+          <span>{language === "id" ? "Keluar" : "Logout"}</span>
         </button>
       </li>
     </>

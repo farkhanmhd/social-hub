@@ -10,6 +10,9 @@ import Loading from "./components/Loading/Loading";
 import useReduxSelector from "./hooks/useReduxSelector";
 import StartThreadModal from "./components/Thread/StartThreadModal";
 import StartCommentModal from "./components/Thread/StartCommentModal";
+import { setTheme } from "./states/theme/slice";
+import { setLanguage } from "./states/language/slice";
+import Footer from "./components/Footer/Footer";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const disableNavbarPath = ["/login", "/register"];
@@ -20,6 +23,23 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const { push } = useRouter();
 
   useEffect(() => {
+    if (localStorage.language === "en") {
+      dispatch(setLanguage("en"));
+      document.documentElement.lang = "en";
+    } else {
+      dispatch(setLanguage("id"));
+      document.documentElement.lang = "id";
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (localStorage.theme === "dark") {
+      dispatch(setTheme("dark"));
+      document.documentElement.classList.add("dark");
+    } else {
+      dispatch(setTheme("light"));
+      document.documentElement.classList.add("light");
+    }
     dispatch(asyncPreloadProcess());
   }, [dispatch]);
 
@@ -55,11 +75,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
         id="content"
         className={`${disableNavbarPath.includes(pathname) ? "mt-0" : "mt-[74px]"}  min-h-[calc(100vh-74px)]`}
       >
-        <main className="min-h-[calc(100vh-74px)] w-full max-w-7xl px-0 pb-[50px] md:mx-auto md:px-10 md:pb-0">
+        <main className="md:px-text-white min-h-[calc(100vh-74px)] w-full max-w-7xl px-0 dark:bg-black dark:text-white md:mx-auto">
           {children}
         </main>
       </div>
       {!disableNavbarPath.includes(pathname) && <NavBottom />}
+      {disableNavbarPath.includes(pathname) && <Footer />}
     </>
   );
 }

@@ -13,7 +13,7 @@ export default function SearchPage() {
   const [usersLimit, setUsersLimit] = useState(20);
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useAppDispatch();
-  const { allUsers } = useReduxSelector();
+  const { allUsers, language } = useReduxSelector();
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
 
@@ -56,8 +56,8 @@ export default function SearchPage() {
         <input
           id="search"
           type="text"
-          className="absolute h-full w-full rounded-2xl border bg-gray-100 pl-12 text-[15px] font-light outline-none duration-200 focus:shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
-          placeholder="Search"
+          className="absolute h-full w-full rounded-2xl border bg-gray-100 pl-12 text-[15px] font-light outline-none duration-200 focus:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:bg-black dark:text-white"
+          placeholder={language === "id" ? "Cari..." : "Search..."}
           value={searchValue}
           onChange={(e) => onSearchChange(e)}
         />
@@ -69,7 +69,7 @@ export default function SearchPage() {
           )
           .slice(0, usersLimit)
           .map((user) => (
-            <li className="rounded-lg duration-200 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+            <li className="rounded-lg duration-200 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:border">
               <Link href={`/${user.id}`}>
                 <div className="p-3">
                   <Profile name={user.name} avatar={user.avatar} />

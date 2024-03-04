@@ -12,7 +12,7 @@ import Dropdown from "../components/Dropdown/Dropdown";
 import useClickOutside from "../hooks/useClickOutside";
 
 export default function HomePage() {
-  const { threads }: { threads: ThreadInterface[] } = useReduxSelector();
+  const { threads, language } = useReduxSelector();
   const [filteredThreads, setFilteredThreads] = useState<ThreadInterface[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
@@ -57,14 +57,21 @@ export default function HomePage() {
         id="categories-container"
         className="flex items-center justify-between gap-x-5 sm:justify-end"
       >
-        <h2 className="ml-4 font-semibold">Filter Threads by Category</h2>
+        <h2 className="ml-4 font-semibold">
+          Filter{" "}
+          {`${language === "en" ? "Threads by Category" : "Thread Berdasarkan Kategori"} `}
+        </h2>
         <div id="categories" className="relative">
           <button
             type="button"
-            className="my-5 mr-3 flex w-[150px] items-center justify-between gap-x-2 rounded-lg border px-3 py-2 text-sm font-semibold"
+            className="my-5 mr-3 flex w-[200px] items-center justify-between gap-x-2 rounded-lg border px-3 py-2 text-sm font-semibold"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
-            <span>{selectedCategory}</span>
+            <span>
+              {language === "id" && selectedCategory === "All Categories"
+                ? "Semua Kategori"
+                : selectedCategory}
+            </span>
             <span>
               <IoChevronDownOutline />
             </span>
@@ -77,7 +84,7 @@ export default function HomePage() {
                   className={itemClass}
                   onClick={onResetCategory}
                 >
-                  All Categories
+                  {language === "en" ? "All Categories" : "Semua Kategori"}
                 </button>
                 {Array.from(
                   new Set(threads.map((thread) => thread.category)),

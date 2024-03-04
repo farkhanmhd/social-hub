@@ -14,7 +14,7 @@ import ImageUploading from "react-images-uploading";
 import { IoImageOutline } from "react-icons/io5";
 
 export default function StartThreadModal() {
-  const { authUser } = useReduxSelector();
+  const { authUser, language } = useReduxSelector();
   const [images, setImages] = useState<any[]>([]);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
@@ -91,12 +91,12 @@ export default function StartThreadModal() {
     >
       <h2
         id="new-thread-outside"
-        className="hidden text-sm font-semibold text-white md:block"
+        className="hidden text-sm font-semibold md:block"
       >
-        New thread
+        {language === "en" ? "New thread" : "Buat Thread"}
       </h2>
       <form
-        className="start-thread-container grid h-screen w-screen gap-1 rounded-lg bg-white p-3 text-[13px] sm:text-[15px] md:h-auto md:max-h-[800px] md:max-w-[620px]"
+        className="start-thread-container grid h-screen w-screen gap-1 rounded-lg bg-white p-3 text-[13px] dark:border dark:bg-black sm:text-[15px] md:h-auto md:max-h-[800px] md:max-w-[620px]"
         ref={modalRef}
         onSubmit={(e) => onAddThread(e)}
       >
@@ -106,14 +106,14 @@ export default function StartThreadModal() {
             className="text-black md:hidden"
             onClick={() => dispatch(setPostModal(false))}
           >
-            Cancel
+            {language === "en" ? "Cancel" : "Batal"}
           </button>
         </div>
         <h2
           id="new-thread-inside"
           className="absolute left-1/2 block -translate-x-1/2 text-[15px] font-semibold text-black md:hidden"
         >
-          New thread
+          {language === "en" ? "New thread" : "Buat Thread"}
         </h2>
         <div className="thread-owner-photo flex items-center">
           <div id="avatar-start-thread" className="w-[36px]">
@@ -132,8 +132,8 @@ export default function StartThreadModal() {
         <div className="thread-title mb-2 ml-2">
           <input
             type="text"
-            className="w-full text-xl font-semibold focus:outline-none sm:text-2xl"
-            placeholder="Title"
+            className="w-full text-xl font-semibold focus:outline-none dark:bg-black sm:text-2xl"
+            placeholder={language === "en" ? "Title" : "Judul"}
             value={title}
             onChange={onTitleChange}
             required
@@ -142,8 +142,8 @@ export default function StartThreadModal() {
         <div className="thread-category ml-2">
           <input
             type="text"
-            className="w-full  py-1 text-sm focus:outline-none"
-            placeholder="Category"
+            className="w-full  py-1 text-sm focus:outline-none dark:bg-black"
+            placeholder={language === "en" ? "Category" : "Kategori"}
             value={category.length > 20 ? category.slice(0, 20) : category}
             onChange={onCategoryChange}
           />
@@ -152,8 +152,10 @@ export default function StartThreadModal() {
           <textarea
             name="thread-body"
             id="thread-body"
-            placeholder="Start a thread..."
-            className="flex h-full w-full resize-none focus:outline-none"
+            placeholder={
+              language === "en" ? "Start a thread..." : "Mulai Thread..."
+            }
+            className="flex h-full w-full resize-none focus:outline-none dark:bg-black"
             value={body}
             onChange={onBodyChange}
             required
@@ -203,7 +205,7 @@ export default function StartThreadModal() {
           </div>
           <button
             type="submit"
-            className={`h-[36px] w-16 ${body.length === 0 ? "cursor-not-allowed bg-[#b1b1b1]" : "cursor-pointer bg-black"}  rounded-full  px-4 py-[6px] font-medium text-white`}
+            className={`h-[36px] w-16 ${body.length === 0 ? "cursor-not-allowed bg-[#b1b1b1]" : "cursor-pointer bg-black"}  rounded-full  px-4 py-[6px] font-medium text-white dark:border`}
             disabled={body.length === 0}
           >
             Post
