@@ -103,7 +103,7 @@ export default function StartThreadModal() {
         <div className="thread-cancel-button mb-8">
           <button
             type="submit"
-            className="text-black md:hidden"
+            className="md:hidden"
             onClick={() => dispatch(setPostModal(false))}
           >
             {language === "en" ? "Cancel" : "Batal"}
@@ -111,7 +111,7 @@ export default function StartThreadModal() {
         </div>
         <h2
           id="new-thread-inside"
-          className="absolute left-1/2 block -translate-x-1/2 text-[15px] font-semibold text-black md:hidden"
+          className="absolute left-1/2 block -translate-x-1/2 text-[15px] font-semibold md:hidden"
         >
           {language === "en" ? "New thread" : "Buat Thread"}
         </h2>

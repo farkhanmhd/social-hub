@@ -85,9 +85,9 @@ export default function StartCommentModal({
         </div>
         <h2
           id="new-thread-inside"
-          className="absolute left-1/2 block -translate-x-1/2 text-[15px] font-semibold text-black md:hidden"
+          className="absolute left-1/2 block -translate-x-1/2 text-[15px] font-semibold  md:hidden"
         >
-          New thread
+          {language === "en" ? "New comment" : "Komentar Baru"}
         </h2>
         <div className="thread-owner-photo flex items-center">
           <div id="avatar-start-thread" className="w-[36px]">
