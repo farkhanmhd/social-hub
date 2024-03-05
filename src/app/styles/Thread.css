@@ -10,7 +10,7 @@
 
 .thread-comment-modal .comment-modal-container {
   grid-template-columns: 1fr 18fr 1fr;
-  grid-template-rows: max-content min-content min-content 5fr min-content min-content min-content;
+  grid-template-rows: max-content min-content min-content 3fr min-content min-content min-content;
   grid-template-areas:
     "owner-photo author posting-time"
     "line title title"
