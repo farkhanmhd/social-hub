@@ -13,7 +13,7 @@ export default function PostLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-[calc(100vh-74px)] flex-col items-stretch md:mx-auto md:max-w-[620px] md:px-6">
+    <div className="flex min-h-[calc(100vh-74px)] flex-col items-stretch pb-[64px] md:mx-auto md:max-w-[620px]">
       {children}
     </div>
   );

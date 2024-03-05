@@ -13,7 +13,7 @@ export default function ProfileLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-[calc(100vh-74px)] flex-col items-stretch md:mx-auto md:max-w-[620px] md:px-6">
+    <div className="flex min-h-[calc(100vh-74px)] flex-col items-stretch pb-[60px] md:mx-auto md:max-w-[620px] md:px-6 md:pb-0">
       {children}
     </div>
   );
