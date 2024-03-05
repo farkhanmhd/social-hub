@@ -72,16 +72,12 @@ export default function StartThreadModal() {
       asyncAddThread({ ...submittedThread, body: updatedBody, category }),
     );
     dispatch(setPostModal(false));
-    if (
-      pathname === "/search" ||
-      pathname === "/activity" ||
-      pathname === "/leaderboard"
-    ) {
-      push("/");
-    }
+
     setTitle("");
     setBody("");
     setCategory("");
+
+    push(`/${authUser.id}`);
   };
 
   return (
