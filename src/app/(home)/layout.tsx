@@ -13,6 +13,8 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full md:mx-auto md:max-w-[620px] md:px-6">{children}</div>
+    <div className="w-full pb-[60px] md:mx-auto md:max-w-[620px] md:px-6 md:pb-0 ">
+      {children}
+    </div>
   );
 }

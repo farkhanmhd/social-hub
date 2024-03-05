@@ -55,12 +55,8 @@ export default function HomePage() {
       <StartThread />
       <div
         id="categories-container"
-        className="flex items-center justify-between gap-x-5 sm:justify-end"
+        className="flex items-center justify-end gap-x-5 sm:justify-end"
       >
-        <h2 className="ml-4 font-semibold">
-          Filter{" "}
-          {`${language === "en" ? "Threads by Category" : "Thread Berdasarkan Kategori"} `}
-        </h2>
         <div id="categories" className="relative">
           <button
             type="button"
