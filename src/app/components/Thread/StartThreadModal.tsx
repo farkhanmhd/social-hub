@@ -9,7 +9,7 @@ import useClickOutside from "@/app/hooks/useClickOutside";
 import useInput from "@/app/hooks/useInput";
 import { asyncAddThread } from "@/app/states/threads/thunk";
 import { ThreadInterface } from "@/app/states/threads/slice";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import ImageUploading from "react-images-uploading";
 import { IoImageOutline } from "react-icons/io5";
 
@@ -17,7 +17,6 @@ export default function StartThreadModal() {
   const { authUser, language } = useReduxSelector();
   const [images, setImages] = useState<any[]>([]);
   const dispatch = useAppDispatch();
-  const pathname = usePathname();
   const {
     value: title,
     onChange: onTitleChange,
