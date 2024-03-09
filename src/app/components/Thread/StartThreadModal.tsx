@@ -99,7 +99,7 @@ export default function StartThreadModal() {
         {language === "en" ? "New thread" : "Buat Thread"}
       </h2>
       <form
-        className="start-thread-container grid h-screen w-screen gap-1 rounded-lg bg-white p-3 text-[13px] dark:border dark:bg-black sm:text-[15px] md:h-[60vh] md:min-h-[400px] md:max-w-[620px]"
+        className="start-thread-container grid h-screen w-screen gap-1 rounded-lg bg-white p-3 text-[13px] dark:border dark:bg-black sm:text-[15px] md:h-[60vh] md:max-h-[600px] md:min-h-[400px] md:max-w-[620px]"
         ref={modalRef}
         onSubmit={(e) => onAddThread(e)}
       >
