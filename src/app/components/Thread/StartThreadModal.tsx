@@ -9,7 +9,7 @@ import useClickOutside from "@/app/hooks/useClickOutside";
 import useInput from "@/app/hooks/useInput";
 import { asyncAddThread } from "@/app/states/threads/thunk";
 import { ThreadInterface } from "@/app/states/threads/slice";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import ImageUploading from "react-images-uploading";
 import { IoImageOutline } from "react-icons/io5";
 
@@ -34,6 +34,8 @@ export default function StartThreadModal() {
   } = useInput("");
   const modalRef = useRef<HTMLFormElement>(null);
   const { push } = useRouter();
+  const pathname = usePathname();
+  const redirect = ["/search", "/activity", "/leaderboard"];
 
   useClickOutside(modalRef, () => {
     dispatch(setPostModal(false));
@@ -67,8 +69,14 @@ export default function StartThreadModal() {
       )
       .join("");
     const updatedBody = `<div><div>${body}</div> <br> ${imagesHtml}</div>`;
+    const postingTime = new Date().toISOString();
     dispatch(
-      asyncAddThread({ ...submittedThread, body: updatedBody, category }),
+      asyncAddThread({
+        ...submittedThread,
+        body: updatedBody,
+        createdAt: postingTime,
+        category,
+      }),
     );
     dispatch(setPostModal(false));
 
@@ -76,7 +84,7 @@ export default function StartThreadModal() {
     setBody("");
     setCategory("");
 
-    push(`/${authUser.id}`);
+    if (redirect.includes(pathname)) push(`/${authUser.id}`);
   };
 
   return (
@@ -91,7 +99,7 @@ export default function StartThreadModal() {
         {language === "en" ? "New thread" : "Buat Thread"}
       </h2>
       <form
-        className="start-thread-container grid h-screen w-screen gap-1 rounded-lg bg-white p-3 text-[13px] dark:border dark:bg-black sm:text-[15px] md:h-auto md:max-h-[500px] md:max-w-[620px]"
+        className="start-thread-container grid h-screen w-screen gap-1 rounded-lg bg-white p-3 text-[13px] dark:border dark:bg-black sm:text-[15px] md:h-[60vh] md:min-h-[400px] md:max-w-[620px]"
         ref={modalRef}
         onSubmit={(e) => onAddThread(e)}
       >

@@ -68,10 +68,9 @@ export default function StartCommentModal({
   };
 
   return (
-    <div className="thread-comment-modal fixed left-0 top-0 z-[99999] flex h-screen w-screen flex-col items-center justify-center bg-black/50">
+    <div className="thread-comment-modal fixed left-0 top-0 z-[999999] flex h-screen w-screen flex-col items-center justify-center bg-black/50">
       <div
-        id="comment-modal-cotainer"
-        className="comment-modal-container grid min-h-screen w-screen gap-1 overflow-auto rounded-lg bg-white p-3 text-[13px] dark:border dark:bg-black sm:text-[15px] md:max-h-[500px] md:min-h-[500px] md:max-w-[620px]"
+        className="comment-modal-container grid h-screen w-screen gap-1 overflow-auto rounded-lg bg-white p-3 text-[13px] dark:border dark:bg-black sm:text-[15px] md:h-[60vh] md:min-h-[400px] md:max-w-[620px]"
         ref={modalRef}
       >
         <div className="thread-cancel-button mb-8">
