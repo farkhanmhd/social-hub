@@ -3,9 +3,14 @@
     "next/core-web-vitals",
     "airbnb",
     "airbnb-typescript",
-    "prettier"
+    "prettier",
+    "cypress",
+    "plugin:storybook/recommended"
   ],
   "parserOptions": {
     "project": "./tsconfig.json"
+  },
+  "env": {
+    "cypress/globals": true
   }
 }
