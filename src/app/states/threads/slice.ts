@@ -94,6 +94,7 @@ const threadSlice = createSlice({
       const { id, comment, authUser } = action.payload;
       const threadToUpdate = state.find((thread) => thread.id === id);
       if (threadToUpdate) {
+        threadToUpdate.totalComments += 1;
         threadToUpdate.comments.unshift({
           id: "",
           createdAt: new Date().toISOString(),

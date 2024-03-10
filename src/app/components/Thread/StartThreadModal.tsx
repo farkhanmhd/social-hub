@@ -68,7 +68,7 @@ export default function StartThreadModal() {
           `<img src="${image.dataURL}" alt="uploaded image" class="rounded-lg mb-3" />`,
       )
       .join("");
-    const updatedBody = `<div><div>${body}</div> <br> ${imagesHtml}</div>`;
+    const updatedBody = `<div><div class="break-words mb-4">${body}</div>${images.length > 0 ? `<div>${imagesHtml}</div>` : ""}</div>`;
     const postingTime = new Date().toISOString();
     dispatch(
       asyncAddThread({

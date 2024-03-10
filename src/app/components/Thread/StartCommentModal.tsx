@@ -50,7 +50,7 @@ export default function StartCommentModal({
           `<img src="${image.dataURL}" alt="uploaded image" class="rounded-lg mb-3" />`,
       )
       .join("");
-    const updatedCommentValue = `<div><div>${commentValue}</div> <br> ${imagesHtml}</div>`;
+    const updatedCommentValue = `<div><div class="break-words mb-4">${commentValue}</div>${images.length > 0 ? `<div>${imagesHtml}</div>` : ""}</div>`;
     dispatch(
       asyncAddComment(threadItemProps.id, updatedCommentValue, authUser),
     );
@@ -140,7 +140,7 @@ export default function StartCommentModal({
             onChange={onCommentChange}
             html={commentValue}
             data-placeholder={`${language === "en" ? "Reply to " : "Balas ke "} ${threadItemProps.ownerName}...`}
-            className="start-comment-content overflow-none relative w-full cursor-text resize-none text-wrap font-light empty:before:text-gray-400 empty:before:content-[attr(data-placeholder)] focus:outline-none"
+            className="start-comment-content overflow-none relative w-full cursor-text resize-none text-wrap break-words font-light empty:before:text-gray-400 empty:before:content-[attr(data-placeholder)] focus:outline-none"
           />
           <div className=" mt-3 flex items-center gap-x-2">
             {images.map((image) => (
