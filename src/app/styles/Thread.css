@@ -31,7 +31,7 @@
 
 .start-thread-container {
   grid-template-columns: 1fr 18fr 2fr;
-  grid-template-rows: 1fr 1fr 1fr 5fr 1fr;
+  grid-template-rows: min-content min-content min-content 5fr min-content;
   grid-template-areas:
     "owner-photo author posting-time"
     "line title title"

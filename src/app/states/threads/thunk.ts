@@ -25,23 +25,19 @@ import {
   updateNeutralizeCommentLike,
 } from "./slice";
 
-// All the code below need to be updated on error handling (catch)
 function asyncSetThread() {
   return async (dispatch: AppDispatch) => {
     try {
       const threads = await getAllThreads();
-
       const threadsWithOwnersPromises: Promise<ThreadInterface>[] = threads.map(
         async (thread: ThreadInterface) => {
           const owner = await getThreadOwner(thread.id);
           return { ...thread, ...owner };
         },
       );
-
       const threadsWithOwners: ThreadInterface[] = await Promise.all(
         threadsWithOwnersPromises,
       );
-
       dispatch(setThreads(threadsWithOwners));
     } catch {
       dispatch(setThreads([]));
@@ -122,23 +118,27 @@ function asyncNeutralizeThreadLike({
 
 function asyncAddComment(id: string, comment: string, authUser: any) {
   return async (dispatch: AppDispatch) => {
+    dispatch(showLoading());
     dispatch(updateThreadComments({ id, comment, authUser }));
     try {
       await createComment({ content: comment, threadId: id });
     } catch {
       dispatch(asyncSetThread());
     }
+    dispatch(hideLoading());
   };
 }
 
 function asyncLikeComment(threadId: string, commentId: string, userId: string) {
   return async (dispatch: AppDispatch) => {
+    dispatch(showLoading());
     dispatch(updateCommentLike({ threadId, commentId, userId }));
     try {
       await likeComment({ threadId, commentId });
     } catch {
       dispatch(asyncSetThread());
     }
+    dispatch(hideLoading());
   };
 }
 
@@ -148,12 +148,14 @@ function asyncDisLikeComment(
   userId: string,
 ) {
   return async (dispatch: AppDispatch) => {
+    dispatch(showLoading());
     dispatch(updateCommentDisLike({ threadId, commentId, userId }));
     try {
       await dislikeComment({ threadId, commentId });
     } catch {
       dispatch(asyncSetThread());
     }
+    dispatch(hideLoading());
   };
 }
 
@@ -163,12 +165,14 @@ function asyncNeutralizeCommentLike(
   userId: string,
 ) {
   return async (dispatch: AppDispatch) => {
+    dispatch(showLoading());
     dispatch(updateNeutralizeCommentLike({ threadId, commentId, userId }));
     try {
       await neutralizeCommentLike({ threadId, commentId });
     } catch {
       dispatch(asyncSetThread());
     }
+    dispatch(hideLoading());
   };
 }
 

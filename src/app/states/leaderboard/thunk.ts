@@ -14,7 +14,7 @@ export default function asyncReceiveLeaderboard() {
       }
     } catch (error) {
       dispatch(receiveLeaderboard([]));
-      dispatch(hideLoading());
     }
+    dispatch(hideLoading());
   };
 }

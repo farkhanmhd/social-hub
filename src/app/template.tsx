@@ -30,9 +30,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       dispatch(setLanguage("id"));
       document.documentElement.lang = "id";
     }
-  }, [dispatch]);
 
-  useEffect(() => {
     if (localStorage.theme === "dark") {
       dispatch(setTheme("dark"));
       document.documentElement.classList.add("dark");

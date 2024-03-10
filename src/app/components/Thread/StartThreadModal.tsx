@@ -163,7 +163,7 @@ export default function StartThreadModal() {
             onChange={onBodyChange}
             required
           />
-          <div className="mt-3">
+          <div className="mt-3 flex gap-x-2">
             {images.map((image) => (
               <div key={image.dataURL}>
                 <Image

@@ -44,11 +44,14 @@ function asyncRegister({
   email: string;
   password: string;
 }) {
-  return async () => {
+  return async (dispatch: AppDispatch) => {
+    dispatch(showLoading());
     try {
       const response = await register({ name, email, password });
+      dispatch(hideLoading());
       return { status: response.status, message: response.message };
     } catch (error) {
+      dispatch(hideLoading());
       return { status: "error", message: error };
     }
   };
