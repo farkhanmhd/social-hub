@@ -60,7 +60,7 @@ export default function HomePage() {
         <div id="categories" className="relative">
           <button
             type="button"
-            className="my-5 mr-3 flex w-[200px] items-center justify-between gap-x-2 rounded-lg border px-3 py-2 text-sm font-semibold"
+            className="mr-3 mt-5 flex w-[200px] items-center justify-between gap-x-2 rounded-lg border px-3 py-2 text-sm font-semibold"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
             <span>

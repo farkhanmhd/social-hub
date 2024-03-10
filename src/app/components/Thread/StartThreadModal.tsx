@@ -151,7 +151,7 @@ export default function StartThreadModal() {
             onChange={onCategoryChange}
           />
         </div>
-        <div className="thread-body relative ml-2 py-2">
+        <div className="thread-body relative ml-2 flex flex-col py-2">
           <textarea
             name="thread-body"
             id="thread-body"
@@ -163,7 +163,7 @@ export default function StartThreadModal() {
             onChange={onBodyChange}
             required
           />
-          <div className="absolute bottom-0 flex items-center gap-x-2">
+          <div className="mt-3">
             {images.map((image) => (
               <div key={image.dataURL}>
                 <Image
