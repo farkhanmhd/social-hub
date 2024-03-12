@@ -1,16 +1,5 @@
 import { AppDispatch } from "@/app/states/index";
-import {
-  getAllThreads,
-  getThreadOwner,
-  createThread,
-  likeThread,
-  dislikeThread,
-  neutralizeThreadLike,
-  createComment,
-  likeComment,
-  neutralizeCommentLike,
-  dislikeComment,
-} from "@/app/api/api";
+import api from "../../api/api";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 import {
   ThreadInterface,
@@ -28,10 +17,10 @@ import {
 function asyncSetThread() {
   return async (dispatch: AppDispatch) => {
     try {
-      const threads = await getAllThreads();
+      const threads = await api.getAllThreads();
       const threadsWithOwnersPromises: Promise<ThreadInterface>[] = threads.map(
         async (thread: ThreadInterface) => {
-          const owner = await getThreadOwner(thread.id);
+          const owner = await api.getThreadOwner(thread.id);
           return { ...thread, ...owner };
         },
       );
@@ -45,18 +34,20 @@ function asyncSetThread() {
   };
 }
 
+// tested thunk
 function asyncAddThread(newThread: ThreadInterface) {
   return async (dispatch: AppDispatch) => {
     const { title, body, category } = newThread;
     dispatch(showLoading());
     dispatch(addNewThread(newThread));
     try {
-      await createThread({ title, body, category });
-    } catch {
+      await api.createThread({ title, body, category });
+    } catch (error) {
+      throw new Error(`Failed to add thread: ${error}`);
+    } finally {
       dispatch(asyncSetThread());
+      dispatch(hideLoading());
     }
-    dispatch(asyncSetThread());
-    dispatch(hideLoading());
   };
 }
 
@@ -71,7 +62,7 @@ function asyncLikeThread({
     dispatch(showLoading());
     dispatch(updateLikeThread({ threadId, userId }));
     try {
-      await likeThread({ threadId });
+      await api.likeThread({ threadId });
     } catch {
       dispatch(asyncSetThread());
     }
@@ -89,7 +80,7 @@ function asyncDisLikeThread({
     dispatch(showLoading());
     dispatch(updateDislikeThread({ threadId, userId }));
     try {
-      await dislikeThread({ threadId });
+      await api.dislikeThread({ threadId });
     } catch {
       dispatch(asyncSetThread());
     }
@@ -108,7 +99,7 @@ function asyncNeutralizeThreadLike({
     dispatch(showLoading());
     dispatch(updateNeutralizeThreadLike({ threadId, userId }));
     try {
-      await neutralizeThreadLike({ threadId });
+      await api.neutralizeThreadLike({ threadId });
     } catch {
       dispatch(asyncSetThread());
     }
@@ -121,7 +112,7 @@ function asyncAddComment(id: string, comment: string, authUser: any) {
     dispatch(showLoading());
     dispatch(updateThreadComments({ id, comment, authUser }));
     try {
-      await createComment({ content: comment, threadId: id });
+      await api.createComment({ content: comment, threadId: id });
     } catch {
       dispatch(asyncSetThread());
     }
@@ -134,7 +125,7 @@ function asyncLikeComment(threadId: string, commentId: string, userId: string) {
     dispatch(showLoading());
     dispatch(updateCommentLike({ threadId, commentId, userId }));
     try {
-      await likeComment({ threadId, commentId });
+      await api.likeComment({ threadId, commentId });
     } catch {
       dispatch(asyncSetThread());
     }
@@ -151,7 +142,7 @@ function asyncDisLikeComment(
     dispatch(showLoading());
     dispatch(updateCommentDisLike({ threadId, commentId, userId }));
     try {
-      await dislikeComment({ threadId, commentId });
+      await api.dislikeComment({ threadId, commentId });
     } catch {
       dispatch(asyncSetThread());
     }
@@ -168,7 +159,7 @@ function asyncNeutralizeCommentLike(
     dispatch(showLoading());
     dispatch(updateNeutralizeCommentLike({ threadId, commentId, userId }));
     try {
-      await neutralizeCommentLike({ threadId, commentId });
+      await api.neutralizeCommentLike({ threadId, commentId });
     } catch {
       dispatch(asyncSetThread());
     }

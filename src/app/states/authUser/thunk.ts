@@ -1,4 +1,4 @@
-import { putAccessToken, login, getOwnProfile, register } from "@/app/api/api";
+import api from "@/app/api/api";
 import { AppDispatch } from "@/app/states/index";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 import { setAuthUser } from "./slice";
@@ -13,10 +13,10 @@ function asyncSetAuthUser({
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {
-      const token = await login({ email, password });
-      putAccessToken(token);
+      const token = await api.login({ email, password });
+      api.putAccessToken(token);
       dispatch(setAuthUser({ email, password }));
-      const authUser = await getOwnProfile();
+      const authUser = await api.getOwnProfile();
       dispatch(setAuthUser(authUser));
       dispatch(hideLoading());
       return { status: "success", message: "Login success" };
@@ -31,7 +31,7 @@ function asyncSetAuthUser({
 function asyncUnsetAuthUser() {
   return (dispatch: AppDispatch) => {
     dispatch(setAuthUser(null));
-    putAccessToken("");
+    api.putAccessToken("");
   };
 }
 
@@ -47,7 +47,7 @@ function asyncRegister({
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {
-      const response = await register({ name, email, password });
+      const response = await api.register({ name, email, password });
       dispatch(hideLoading());
       return { status: response.status, message: response.message };
     } catch (error) {

@@ -97,7 +97,7 @@ const threadSlice = createSlice({
         threadToUpdate.totalComments += 1;
         threadToUpdate.comments.unshift({
           id: "",
-          createdAt: new Date().toISOString(),
+          createdAt: "",
           content: comment,
           owner: {
             id: authUser.id,

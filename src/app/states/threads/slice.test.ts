@@ -1,5 +1,3 @@
-import threadSlice, { ThreadInterface, ThreadCommentsInterface } from "./slice";
-
 /**
  * test scenarios for thread slice
  *
@@ -9,6 +7,8 @@ import threadSlice, { ThreadInterface, ThreadCommentsInterface } from "./slice";
  * should push a new userId to comments upVotesBy
  * should filter remove a userId from upVotesBy and downVotesBy
  */
+
+import threadSlice, { ThreadInterface, ThreadCommentsInterface } from "./slice";
 
 describe("thread slice", () => {
   it("should return a new thread", () => {
@@ -45,7 +45,7 @@ describe("thread slice", () => {
         title: "test",
         body: "test",
         category: "test",
-        createdAt: new Date().toISOString(),
+        createdAt: "",
         ownerId: "user-1",
         upVotesBy: [],
         downVotesBy: [],
@@ -62,10 +62,10 @@ describe("thread slice", () => {
       avatar: "https://ui-avatars.com/api/?name=test&background=random",
     };
 
-    const newComment: ThreadCommentsInterface = {
+    const newComment = {
       id: "",
-      createdAt: new Date().toISOString(),
       content: "test",
+      createdAt: "",
       owner: {
         id: authUser.id,
         name: authUser.name,
@@ -132,7 +132,7 @@ describe("thread slice", () => {
           {
             id: "comment-1",
             content: "test",
-            createdAt: new Date().toISOString(),
+            createdAt: "" || new Date().toISOString(),
             owner: {
               id: "user-7rD3YddCPGnpWpWO",
               name: "test",
