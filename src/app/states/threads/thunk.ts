@@ -24,9 +24,7 @@ function asyncSetThread() {
           return { ...thread, ...owner };
         },
       );
-      const threadsWithOwners: ThreadInterface[] = await Promise.all(
-        threadsWithOwnersPromises,
-      );
+      const threadsWithOwners: ThreadInterface[] = await Promise.all(threadsWithOwnersPromises);
       dispatch(setThreads(threadsWithOwners));
     } catch {
       dispatch(setThreads([]));
@@ -43,7 +41,8 @@ function asyncAddThread(newThread: ThreadInterface) {
     try {
       await api.createThread({ title, body, category });
     } catch (error) {
-      throw new Error(`Failed to add thread: ${error}`);
+      const errorMessage = `Failed to add thread: ${error}`;
+      throw new Error(errorMessage);
     } finally {
       dispatch(asyncSetThread());
       dispatch(hideLoading());
@@ -51,13 +50,7 @@ function asyncAddThread(newThread: ThreadInterface) {
   };
 }
 
-function asyncLikeThread({
-  threadId,
-  userId,
-}: {
-  threadId: string;
-  userId: string;
-}) {
+function asyncLikeThread({ threadId, userId }: { threadId: string; userId: string }) {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     dispatch(updateLikeThread({ threadId, userId }));
@@ -69,13 +62,7 @@ function asyncLikeThread({
     dispatch(hideLoading());
   };
 }
-function asyncDisLikeThread({
-  threadId,
-  userId,
-}: {
-  threadId: string;
-  userId: string;
-}) {
+function asyncDisLikeThread({ threadId, userId }: { threadId: string; userId: string }) {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     dispatch(updateDislikeThread({ threadId, userId }));
@@ -88,13 +75,7 @@ function asyncDisLikeThread({
   };
 }
 
-function asyncNeutralizeThreadLike({
-  threadId,
-  userId,
-}: {
-  threadId: string;
-  userId: string;
-}) {
+function asyncNeutralizeThreadLike({ threadId, userId }: { threadId: string; userId: string }) {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     dispatch(updateNeutralizeThreadLike({ threadId, userId }));
@@ -133,11 +114,7 @@ function asyncLikeComment(threadId: string, commentId: string, userId: string) {
   };
 }
 
-function asyncDisLikeComment(
-  threadId: string,
-  commentId: string,
-  userId: string,
-) {
+function asyncDisLikeComment(threadId: string, commentId: string, userId: string) {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     dispatch(updateCommentDisLike({ threadId, commentId, userId }));
@@ -150,11 +127,7 @@ function asyncDisLikeComment(
   };
 }
 
-function asyncNeutralizeCommentLike(
-  threadId: string,
-  commentId: string,
-  userId: string,
-) {
+function asyncNeutralizeCommentLike(threadId: string, commentId: string, userId: string) {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     dispatch(updateNeutralizeCommentLike({ threadId, commentId, userId }));
