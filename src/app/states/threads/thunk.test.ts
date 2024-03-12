@@ -36,9 +36,7 @@ describe("asyncAddThread thunk", () => {
   it("Should dispatch actions correctly when data fetched successfully", async () => {
     // arrange
     // stub implementation
-    api.createThread = jest
-      .fn()
-      .mockImplementation(() => Promise.resolve(fakeNewThread));
+    api.createThread = jest.fn().mockImplementation(() => Promise.resolve(fakeNewThread));
 
     // mock dispatch
     const dispatch = jest.fn();
@@ -47,9 +45,9 @@ describe("asyncAddThread thunk", () => {
     await asyncAddThread(fakeThreadResponse)(dispatch);
 
     // assert
-    expect(dispatch).toHaveBeenCalledWith(showLoading());
-    expect(dispatch).toHaveBeenCalledWith(addNewThread(fakeThreadResponse));
-    expect(dispatch).toHaveBeenCalledWith(asyncSetThread());
-    expect(dispatch).toHaveBeenCalledWith(hideLoading());
+    expect(dispatch).toHaveBeenNthCalledWith(1, showLoading());
+    expect(dispatch).toHaveBeenNthCalledWith(2, addNewThread(fakeThreadResponse));
+    expect(dispatch).toHaveBeenNthCalledWith(3, expect.any(Function));
+    expect(dispatch).toHaveBeenNthCalledWith(4, hideLoading());
   });
 });
