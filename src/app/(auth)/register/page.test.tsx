@@ -4,16 +4,17 @@
  * - Should handle name typing correctly
  * - Should handle email typing correctly
  * - Should handle password typing correctly
- * - should call onRegister function when Register button is clicked
+ * - should call onRegister function when form is submitted
  */
 
-import React from "react";
+import React, { FormEvent } from "react";
 import RegisterPage from "./page";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import matchers from "@testing-library/jest-dom";
 import { Provider } from "react-redux";
 import store from "../../states/index";
+import { asyncRegister } from "../../states/authUser/thunk";
 import { useRouter } from "next/navigation";
 
 jest.mock("next/navigation", () => {
@@ -48,7 +49,39 @@ describe("RegisterPage component", () => {
     // Assert
     expect(nameInput).toHaveValue("testing");
   });
-  it("Should handle email typing correctly", () => {});
-  it("Should handle password typing correctly", () => {});
-  it("Should call onRegister function when Register button is clicked", () => {});
+
+  it("Should handle email typing correctly", async () => {
+    render(
+      <Provider store={store}>
+        <RegisterPage />
+      </Provider>,
+    );
+
+    // Arrange
+    const emailInput = screen.getByPlaceholderText("youremail@example.com");
+
+    // Action
+    await userEvent.type(emailInput, "testing123@testing.com");
+
+    // Assert
+    expect(emailInput).toHaveValue("testing123@testing.com");
+  });
+
+  it("Should call onRegister function when form is submitted", async () => {
+    // Arrange
+    const mockRegister = jest.fn();
+
+    render(
+      <Provider store={store}>
+        <RegisterPage />
+      </Provider>,
+    );
+
+    const registerButton = await screen.getByTestId("register-button");
+
+    // Action
+    await expect(
+      userEvent.click(registerButton).then(() => expect(mockRegister).toHaveBeenCalled()),
+    );
+  });
 });
