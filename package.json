@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --no-watch",
+    "test": "jest --watchAll",
     "e2e": "cypress run",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -27,6 +27,8 @@
     "redux": "^5.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.24.0",
     "@babel/preset-typescript": "^7.23.3",
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-interactions": "^7.6.17",
@@ -46,6 +48,7 @@
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "autoprefixer": "^10.0.1",
+    "babel-jest": "^29.7.0",
     "cypress": "^13.6.6",
     "eslint": "^8",
     "eslint-config-airbnb": "^19.0.4",

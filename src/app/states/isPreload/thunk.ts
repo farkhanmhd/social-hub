@@ -11,14 +11,13 @@ function asyncPreloadProcess() {
     try {
       const authUser = await api.getOwnProfile();
       dispatch(setAuthUser(authUser));
-    } catch (error) {
+    } catch {
       dispatch(setAuthUser(null));
-      throw new Error("Failed to get profile data: " + error);
     } finally {
       dispatch(setIsPreload(false));
       dispatch(asyncSetThread());
+      dispatch(hideLoading());
     }
-    dispatch(hideLoading());
   };
 }
 

@@ -12,5 +12,13 @@
   },
   "env": {
     "cypress/globals": true
-  }
+  },
+  "overrides": [
+    {
+      "files": ["tests/**/*"],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }

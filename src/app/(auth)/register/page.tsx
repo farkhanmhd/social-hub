@@ -2,13 +2,13 @@
 
 import React, { useState, useRef } from "react";
 import Link from "next/link";
-import FormInput from "@/app/components/Form/FormInput";
-import useInput from "@/app/hooks/useInput";
-import { useAppDispatch } from "@/app/states/hooks";
-import { asyncRegister } from "@/app/states/authUser/thunk";
+import FormInput from "../../components/Form/FormInput";
+import useInput from "../../hooks/useInput";
+import { useAppDispatch } from "../../states/hooks";
+import { asyncRegister } from "../../states/authUser/thunk";
 import { useRouter } from "next/navigation";
-import useClickOutside from "@/app/hooks/useClickOutside";
-import Modal from "@/app/components/CommonModal/Modal";
+import useClickOutside from "../../hooks/useClickOutside";
+import Modal from "../../components/CommonModal/Modal";
 
 export default function RegisterPage() {
   const { value: name, onChange: setName } = useInput("");
@@ -26,9 +26,7 @@ export default function RegisterPage() {
 
   const onRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { status, message } = await dispatch(
-      asyncRegister({ name, email, password }),
-    );
+    const { status, message } = await dispatch(asyncRegister({ name, email, password }));
     setOpenModal(true);
     setModalMessage(message);
     if (status === "success") {
@@ -40,9 +38,7 @@ export default function RegisterPage() {
 
   return (
     <>
-      {openModal && (
-        <Modal title="Register" message={modalMessage} ref={modalRef} />
-      )}
+      {openModal && <Modal title="Register" message={modalMessage} ref={modalRef} />}
       <div className="flex min-h-screen flex-1 flex-col items-center justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-semibold leading-9 tracking-tight ">

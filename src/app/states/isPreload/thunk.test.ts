@@ -35,6 +35,7 @@ describe("asyncPreloadProcess thunk", () => {
     expect(dispatch).toHaveBeenNthCalledWith(2, setAuthUser(fakeAuthUser));
     expect(dispatch).toHaveBeenNthCalledWith(3, setIsPreload(false));
     expect(dispatch).toHaveBeenNthCalledWith(4, expect.any(Function));
+    expect(dispatch).toHaveBeenNthCalledWith(5, hideLoading());
   });
 
   it("Should dispatch actions correctly when data fetch failed", async () => {
@@ -47,13 +48,12 @@ describe("asyncPreloadProcess thunk", () => {
     const dispatch = jest.fn();
 
     // action
-    await expect(asyncPreloadProcess()(dispatch)).rejects.toThrow(
-      `Failed to get profile data: ${errorMessage}`,
-    );
+    await asyncPreloadProcess()(dispatch);
     // assert
     expect(dispatch).toHaveBeenNthCalledWith(1, showLoading());
     expect(dispatch).toHaveBeenNthCalledWith(2, setAuthUser(null));
     expect(dispatch).toHaveBeenNthCalledWith(3, setIsPreload(false));
     expect(dispatch).toHaveBeenNthCalledWith(4, expect.any(Function));
+    expect(dispatch).toHaveBeenNthCalledWith(5, hideLoading());
   });
 });

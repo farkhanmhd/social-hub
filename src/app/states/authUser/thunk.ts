@@ -1,15 +1,9 @@
-import api from "@/app/api/api";
-import { AppDispatch } from "@/app/states/index";
+import api from "../../api/api";
+import { AppDispatch } from "../index";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 import { setAuthUser } from "./slice";
 
-function asyncSetAuthUser({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) {
+function asyncSetAuthUser({ email, password }: { email: string; password: string }) {
   return async (dispatch: AppDispatch) => {
     dispatch(showLoading());
     try {
