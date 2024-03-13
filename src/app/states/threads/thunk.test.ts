@@ -6,11 +6,10 @@
  *  - Should dispatch actions correctly when data fetch failed
  */
 
-import { asyncAddThread, asyncSetThread } from "./thunk";
+import { asyncAddThread } from "./thunk";
 import { addNewThread, ThreadInterface } from "./slice";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 import api from "../../api/api";
-import { error } from "console";
 
 const fakeThreadResponse: ThreadInterface = {
   id: "thread-1",
@@ -65,6 +64,8 @@ describe("asyncAddThread thunk", () => {
     await expect(asyncAddThread(fakeThreadResponse)(dispatch)).rejects.toThrow(
       `Failed to add thread: ${errorMessage}`,
     );
+
+    // assert
     expect(dispatch).toHaveBeenNthCalledWith(1, showLoading());
     expect(dispatch).toHaveBeenNthCalledWith(2, addNewThread(fakeThreadResponse));
     expect(dispatch).toHaveBeenNthCalledWith(3, expect.any(Function));

@@ -32,7 +32,6 @@ function asyncSetThread() {
   };
 }
 
-// tested thunk
 function asyncAddThread(newThread: ThreadInterface) {
   return async (dispatch: AppDispatch) => {
     const { title, body, category } = newThread;
