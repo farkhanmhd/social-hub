@@ -4,14 +4,12 @@ function useInput(defaultValue = "") {
   const [value, setValue] = useState(defaultValue);
 
   function handleValueChange(
-    event:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>,
+    event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
   ) {
     setValue(event.target.value);
   }
 
-  return { value, onChange: handleValueChange, setValue };
+  return { value, setValue };
 }
 
 export default useInput;
