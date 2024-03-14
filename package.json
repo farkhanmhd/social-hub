@@ -11,7 +11,7 @@
     "e2e": "cypress run",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "ci:test": "jest --no-watch && start-server-and-test dev http-get://localhost:3000 e2e"
+    "ci:test": "jest --no-watch && start-server-and-test dev http://localhost:3000 e2e"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
