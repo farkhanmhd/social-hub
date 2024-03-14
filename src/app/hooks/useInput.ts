@@ -9,7 +9,7 @@ function useInput(defaultValue = "") {
     setValue(event.target.value);
   }
 
-  return { value, setValue };
+  return { value, onChange: handleValueChange, setValue };
 }
 
 export default useInput;
