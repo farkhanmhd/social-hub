@@ -1,8 +1,8 @@
 # SocialHub
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/farkhanmhd/social-hub)](https://github.com/yourusername/farkhanmhd/issues)
-[![GitHub stars](https://img.shields.io/github/stars/farkhanmhd/repositoryname)](https://github.com/farkhanmhd/social-hub/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/farkhanmhd/social-hub)](https://github.com/farkhanmhd/social-hub/issues)
+[![GitHub stars](https://img.shields.io/github/stars/farkhanmhd/social-hub)](https://github.com/farkhanmhd/social-hub/stargazers)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
