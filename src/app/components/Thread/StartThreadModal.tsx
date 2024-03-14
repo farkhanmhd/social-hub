@@ -12,26 +12,15 @@ import { ThreadInterface } from "@/app/states/threads/slice";
 import { useRouter, usePathname } from "next/navigation";
 import ImageUploading from "react-images-uploading";
 import { IoImageOutline } from "react-icons/io5";
+import Button from "../Button/Button";
 
 export default function StartThreadModal() {
   const { authUser, language } = useReduxSelector();
   const [images, setImages] = useState<any[]>([]);
   const dispatch = useAppDispatch();
-  const {
-    value: title,
-    onChange: onTitleChange,
-    setValue: setTitle,
-  } = useInput("");
-  const {
-    value: category,
-    onChange: onCategoryChange,
-    setValue: setCategory,
-  } = useInput("");
-  const {
-    value: body,
-    onChange: onBodyChange,
-    setValue: setBody,
-  } = useInput("");
+  const { value: title, onChange: onTitleChange, setValue: setTitle } = useInput("");
+  const { value: category, onChange: onCategoryChange, setValue: setCategory } = useInput("");
+  const { value: body, onChange: onBodyChange, setValue: setBody } = useInput("");
   const modalRef = useRef<HTMLFormElement>(null);
   const { push } = useRouter();
   const pathname = usePathname();
@@ -63,10 +52,7 @@ export default function StartThreadModal() {
   const onAddThread = (e: React.FormEvent) => {
     e.preventDefault();
     const imagesHtml = images
-      .map(
-        (image) =>
-          `<img src="${image.dataURL}" alt="uploaded image" class="rounded-lg mb-3" />`,
-      )
+      .map((image) => `<img src="${image.dataURL}" alt="uploaded image" class="rounded-lg mb-3" />`)
       .join("");
     const updatedBody = `<div><div class="break-words mb-4">${body}</div>${images.length > 0 ? `<div>${imagesHtml}</div>` : ""}</div>`;
     const postingTime = new Date().toISOString();
@@ -92,10 +78,7 @@ export default function StartThreadModal() {
       id="start-thread-modal"
       className="fixed top-0 z-[99999] flex h-screen w-screen flex-col items-center justify-center gap-y-5 bg-black/70"
     >
-      <h2
-        id="new-thread-outside"
-        className="hidden text-sm font-semibold md:block"
-      >
+      <h2 id="new-thread-outside" className="hidden text-sm font-semibold md:block">
         {language === "en" ? "New thread" : "Buat Thread"}
       </h2>
       <form
@@ -104,11 +87,7 @@ export default function StartThreadModal() {
         onSubmit={(e) => onAddThread(e)}
       >
         <div className="thread-cancel-button mb-8">
-          <button
-            type="submit"
-            className="md:hidden"
-            onClick={() => dispatch(setPostModal(false))}
-          >
+          <button type="submit" className="md:hidden" onClick={() => dispatch(setPostModal(false))}>
             {language === "en" ? "Cancel" : "Batal"}
           </button>
         </div>
@@ -155,9 +134,7 @@ export default function StartThreadModal() {
           <textarea
             name="thread-body"
             id="thread-body"
-            placeholder={
-              language === "en" ? "Start a thread..." : "Mulai Thread..."
-            }
+            placeholder={language === "en" ? "Start a thread..." : "Mulai Thread..."}
             className="flex h-full w-full resize-none focus:outline-none dark:bg-black"
             value={body}
             onChange={onBodyChange}
@@ -206,13 +183,9 @@ export default function StartThreadModal() {
               )}
             </ImageUploading>
           </div>
-          <button
-            type="submit"
-            className={`h-[36px] w-16 ${body.length === 0 ? "cursor-not-allowed bg-[#b1b1b1]" : "cursor-pointer bg-black"}  rounded-full  px-4 py-[6px] font-medium text-white dark:border`}
-            disabled={body.length === 0}
-          >
+          <Button type="submit" disabled={body.length === 0}>
             Post
-          </button>
+          </Button>
         </div>
       </form>
     </div>

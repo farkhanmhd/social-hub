@@ -45,15 +45,10 @@ export default function StartCommentModal({
   const onAddComment = (e: React.FormEvent) => {
     e.preventDefault();
     const imagesHtml = images
-      .map(
-        (image) =>
-          `<img src="${image.dataURL}" alt="uploaded image" class="rounded-lg mb-3" />`,
-      )
+      .map((image) => `<img src="${image.dataURL}" alt="uploaded image" class="rounded-lg mb-3" />`)
       .join("");
     const updatedCommentValue = `<div><div class="break-words mb-4">${commentValue}</div>${images.length > 0 ? `<div>${imagesHtml}</div>` : ""}</div>`;
-    dispatch(
-      asyncAddComment(threadItemProps.id, updatedCommentValue, authUser),
-    );
+    dispatch(asyncAddComment(threadItemProps.id, updatedCommentValue, authUser));
     dispatch(asyncSetThread());
     dispatch(setCommentModal(false));
     setCommentValue("");
@@ -103,9 +98,7 @@ export default function StartCommentModal({
           <p className="font-semibold">{threadItemProps?.ownerName}</p>
         </div>
         <div className="thread-title my-3 ml-0">
-          <h1 className="text-xl font-semibold sm:text-2xl">
-            {threadItemProps?.title}
-          </h1>
+          <h1 className="text-xl font-semibold sm:text-2xl">{threadItemProps?.title}</h1>
         </div>
         <div className="thread-category">
           <button type="button" className="rounded-lg border px-2 py-1 text-xs">
@@ -113,9 +106,7 @@ export default function StartCommentModal({
           </button>
         </div>
         <div className="thread-posting-time flex items-center justify-end ">
-          <p className="mr-3 text-[#ababab]">
-            {getTimeDifference(threadItemProps?.createdAt)}
-          </p>
+          <p className="mr-3 text-[#ababab]">{getTimeDifference(threadItemProps?.createdAt)}</p>
         </div>
         <div className="thread-body ml-1 py-2">
           <div>{parse(threadItemProps?.body)}</div>
