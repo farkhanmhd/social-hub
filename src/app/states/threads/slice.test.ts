@@ -8,6 +8,7 @@
  * should filter remove a userId from upVotesBy and downVotesBy
  */
 
+import { describe, it, expect } from "@jest/globals";
 import threadSlice, { ThreadInterface } from "./slice";
 
 describe("thread slice", () => {
