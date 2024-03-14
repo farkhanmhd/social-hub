@@ -7,25 +7,19 @@
  * - should call onRegister function when form is submitted
  */
 
-import React, { FormEvent } from "react";
-import RegisterPage from "./page";
+import React from "react";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import matchers from "@testing-library/jest-dom";
 import { Provider } from "react-redux";
+import RegisterPage from "./page";
 import store from "../../states/index";
-import { asyncRegister } from "../../states/authUser/thunk";
-import { useRouter } from "next/navigation";
 
-jest.mock("next/navigation", () => {
-  return {
-    useRouter: () => {
-      return {
-        push: () => {},
-      };
-    },
-  };
-});
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+  }),
+}));
 
 expect.extend(matchers);
 

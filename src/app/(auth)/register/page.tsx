@@ -2,11 +2,11 @@
 
 import React, { useState, useRef } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import FormInput from "../../components/Form/FormInput";
 import useInput from "../../hooks/useInput";
 import { useAppDispatch } from "../../states/hooks";
 import { asyncRegister } from "../../states/authUser/thunk";
-import { useRouter } from "next/navigation";
 import useClickOutside from "../../hooks/useClickOutside";
 import Modal from "../../components/CommonModal/Modal";
 

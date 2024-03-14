@@ -1,6 +1,6 @@
 import { AppDispatch } from "@/app/states/index";
-import api from "../../api/api";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
+import api from "../../api/api";
 import { setAuthUser } from "../authUser/slice";
 import { setIsPreload } from "./slice";
 import { asyncSetThread } from "../threads/thunk";

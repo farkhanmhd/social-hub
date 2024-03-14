@@ -6,9 +6,9 @@
  *  - Should dispatch actions correctly when data fetch failed
  */
 
+import { hideLoading, showLoading } from "react-redux-loading-bar";
 import asyncPreloadProcess from "./thunk";
 import api from "../../api/api";
-import { hideLoading, showLoading } from "react-redux-loading-bar";
 import { setAuthUser } from "../authUser/slice";
 import { setIsPreload } from "./slice";
 

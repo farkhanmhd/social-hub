@@ -4,7 +4,6 @@
     "airbnb",
     "airbnb-typescript",
     "prettier",
-    "cypress",
     "plugin:storybook/recommended"
   ],
   "parserOptions": {
@@ -20,5 +19,6 @@
         "jest": true
       }
     }
-  ]
+  ],
+  "plugins": ["cypress"]
 }

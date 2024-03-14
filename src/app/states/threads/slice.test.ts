@@ -8,7 +8,7 @@
  * should filter remove a userId from upVotesBy and downVotesBy
  */
 
-import threadSlice, { ThreadInterface, ThreadCommentsInterface } from "./slice";
+import threadSlice, { ThreadInterface } from "./slice";
 
 describe("thread slice", () => {
   it("should return a new thread", () => {

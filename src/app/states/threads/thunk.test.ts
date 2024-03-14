@@ -6,9 +6,9 @@
  *  - Should dispatch actions correctly when data fetch failed
  */
 
+import { showLoading, hideLoading } from "react-redux-loading-bar";
 import { asyncAddThread } from "./thunk";
 import { addNewThread, ThreadInterface } from "./slice";
-import { showLoading, hideLoading } from "react-redux-loading-bar";
 import api from "../../api/api";
 
 const fakeThreadResponse: ThreadInterface = {
