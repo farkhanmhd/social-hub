@@ -8,6 +8,10 @@ This project is a clone of Threads by instagram built with Next.js, TailwindCSS,
 
 API docs for this project: [https://forum-api.dicoding.dev/v1#/](https://forum-api.dicoding.dev/v1#/)
 
+Demo site: [https://social-hub-farkhan.vercel.app/](https://social-hub-farkhan.vercel.app/)
+
+deployed with [Vercel](https://vercel.com/)
+
 made by [farkhanmhd](https://github.com/farkhanmhd)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
