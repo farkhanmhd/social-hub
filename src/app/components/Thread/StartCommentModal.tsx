@@ -1,17 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
-import useClickOutside from "@/app/hooks/useClickOutside";
-import { useAppDispatch } from "@/app/states/hooks";
-import { setCommentModal } from "@/app/states/commentModal/slice";
-import useReduxSelector from "@/app/hooks/useReduxSelector";
-import { ThreadInterface } from "@/app/states/threads/slice";
-import Image from "next/image";
-import { getTimeDifference } from "@/app/utils/util";
-import parse from "html-react-parser";
-import { asyncAddComment, asyncSetThread } from "@/app/states/threads/thunk";
-import ContentEditable, { ContentEditableEvent } from "react-contenteditable";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import parse from "html-react-parser";
+import ContentEditable, { ContentEditableEvent } from "react-contenteditable";
 import ImageUploading from "react-images-uploading";
 import { IoImageOutline } from "react-icons/io5";
+import useClickOutside from "../../hooks/useClickOutside";
+import { useAppDispatch } from "../../states/hooks";
+import { setCommentModal } from "../../states/commentModal/slice";
+import useReduxSelector from "../../hooks/useReduxSelector";
+import { ThreadInterface } from "../../states/threads/slice";
+import { getTimeDifference } from "../../utils/util";
+import { asyncAddComment, asyncSetThread } from "../../states/threads/thunk";
 
 export default function StartCommentModal({
   threadItemProps,

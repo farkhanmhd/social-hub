@@ -2,10 +2,10 @@
 
 import React from "react";
 import Image from "next/image";
-import useReduxSelector from "@/app/hooks/useReduxSelector";
 import Link from "next/link";
-import { useAppDispatch } from "@/app/states/hooks";
-import { setPostModal } from "@/app/states/commentModal/slice";
+import useReduxSelector from "../../hooks/useReduxSelector";
+import { useAppDispatch } from "../../states/hooks";
+import { setPostModal } from "../../states/commentModal/slice";
 import Button from "../Button/Button";
 
 export default function StartThread() {
@@ -31,7 +31,7 @@ export default function StartThread() {
       >
         {language === "id" ? "Buat thread baru..." : "Start a thread..."}
       </button>
-      <Button type="button" disabled>
+      <Button type="button" disabled onClick={(e) => e}>
         Post
       </Button>
     </div>

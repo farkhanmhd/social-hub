@@ -2,16 +2,16 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import { useAppDispatch } from "@/app/states/hooks";
-import { setPostModal } from "@/app/states/commentModal/slice";
-import useReduxSelector from "@/app/hooks/useReduxSelector";
-import useClickOutside from "@/app/hooks/useClickOutside";
-import useInput from "@/app/hooks/useInput";
-import { asyncAddThread } from "@/app/states/threads/thunk";
-import { ThreadInterface } from "@/app/states/threads/slice";
 import { useRouter, usePathname } from "next/navigation";
 import ImageUploading from "react-images-uploading";
 import { IoImageOutline } from "react-icons/io5";
+import { setPostModal } from "../../states/commentModal/slice";
+import useReduxSelector from "../../hooks/useReduxSelector";
+import useClickOutside from "../../hooks/useClickOutside";
+import useInput from "../../hooks/useInput";
+import { asyncAddThread } from "../../states/threads/thunk";
+import { ThreadInterface } from "../../states/threads/slice";
+import { useAppDispatch } from "../../states/hooks";
 import Button from "../Button/Button";
 
 export default function StartThreadModal() {
@@ -183,7 +183,7 @@ export default function StartThreadModal() {
               )}
             </ImageUploading>
           </div>
-          <Button type="submit" disabled={body.length === 0}>
+          <Button type="submit" disabled={body.length === 0} onClick={onAddThread}>
             Post
           </Button>
         </div>

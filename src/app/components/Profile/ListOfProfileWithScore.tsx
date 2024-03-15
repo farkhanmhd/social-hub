@@ -1,6 +1,6 @@
 import React from "react";
-import { LeaderboardInterface } from "@/app/states/leaderboard/slice";
 import Link from "next/link";
+import { LeaderboardInterface } from "../../states/leaderboard/slice";
 import ProfileWithScore from "./ProfileWIthScore";
 
 export default function ListOfProfileWithScore({
