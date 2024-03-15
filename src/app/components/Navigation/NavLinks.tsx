@@ -10,10 +10,10 @@ import {
   IoPerson,
   IoPersonOutline,
 } from "react-icons/io5";
-import { useAppDispatch } from "@/app/states/hooks";
-import useReduxSelector from "@/app/hooks/useReduxSelector";
 import { usePathname } from "next/navigation";
-import { setPostModal } from "@/app/states/commentModal/slice";
+import { setPostModal } from "../../states/commentModal/slice";
+import { useAppDispatch } from "../../states/hooks";
+import useReduxSelector from "../../hooks/useReduxSelector";
 import NavLink from "./NavLink";
 import NavButton from "./NavButton";
 
@@ -23,9 +23,7 @@ export default function NavLinks() {
   const pathname = usePathname();
   return (
     <>
-      <NavLink href="/">
-        {pathname === "/" ? <IoHome /> : <IoHomeOutline />}
-      </NavLink>
+      <NavLink href="/">{pathname === "/" ? <IoHome /> : <IoHomeOutline />}</NavLink>
       <NavLink href="/search">
         {pathname === "/search" ? <IoSearch /> : <IoSearchOutline />}
       </NavLink>

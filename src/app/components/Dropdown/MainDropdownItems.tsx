@@ -1,22 +1,13 @@
 import React from "react";
 import Link from "next/link";
-import useReduxSelector from "@/app/hooks/useReduxSelector";
-import { useAppDispatch } from "@/app/states/hooks";
-import { asyncUnsetAuthUser } from "@/app/states/authUser/thunk";
-import { setThreads } from "@/app/states/threads/slice";
-import { setDropDownMode } from "@/app/states/dropDownMode/slice";
-import {
-  IoBarChart,
-  IoLanguage,
-  IoDesktopOutline,
-  IoLogOutOutline,
-} from "react-icons/io5";
+import { IoBarChart, IoLanguage, IoDesktopOutline, IoLogOutOutline } from "react-icons/io5";
+import useReduxSelector from "../../hooks/useReduxSelector";
+import { useAppDispatch } from "../../states/hooks";
+import { asyncUnsetAuthUser } from "../../states/authUser/thunk";
+import { setThreads } from "../../states/threads/slice";
+import { setDropDownMode } from "../../states/dropDownMode/slice";
 
-export default function MainDropdownItems({
-  itemClass,
-}: {
-  itemClass: string;
-}) {
+export default function MainDropdownItems({ itemClass }: { itemClass: string }) {
   const dispatch = useAppDispatch();
   const { language } = useReduxSelector();
 

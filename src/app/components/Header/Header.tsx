@@ -2,10 +2,10 @@
 
 import React, { useRef, useState } from "react";
 import { IoReorderTwoOutline } from "react-icons/io5";
-import { useAppDispatch } from "@/app/states/hooks";
-import useReduxSelector from "@/app/hooks/useReduxSelector";
-import { setDropDownMode } from "@/app/states/dropDownMode/slice";
-import useClickOutside from "@/app/hooks/useClickOutside";
+import { useAppDispatch } from "../../states/hooks";
+import useReduxSelector from "../../hooks/useReduxSelector";
+import { setDropDownMode } from "../../states/dropDownMode/slice";
+import useClickOutside from "../../hooks/useClickOutside";
 import NavHeader from "../Navigation/NavHeader";
 import Dropdown from "../Dropdown/Dropdown";
 import MainDropdownItems from "../Dropdown/MainDropdownItems";
@@ -39,12 +39,13 @@ export default function Header() {
         <div
           id="logo"
           className="absolute left-1/2 -translate-x-1/2 text-xl md:static md:left-0 md:translate-x-0"
+          data-testid="logo"
         >
           <span className="text-black dark:text-white">Social</span>
           <span className="font-semibold text-blue-500">Hub</span>
         </div>
         <NavHeader />
-        <div id="dropdown" className="relative text-blue-300 ">
+        <div id="dropdown" className="relative text-blue-300" data-testid="dropdown">
           <button
             type="button"
             id="menu-btn-icon"
@@ -57,15 +58,9 @@ export default function Header() {
           </button>
           {isDropdownOpen && (
             <Dropdown ref={dropdownRef}>
-              {dropDownMode === "main" && (
-                <MainDropdownItems itemClass={itemClass} />
-              )}
-              {dropDownMode === "theme" && (
-                <ThemeDropDownItems itemClass={itemClass} />
-              )}
-              {dropDownMode === "language" && (
-                <LanguageDropdownItems itemClass={itemClass} />
-              )}
+              {dropDownMode === "main" && <MainDropdownItems itemClass={itemClass} />}
+              {dropDownMode === "theme" && <ThemeDropDownItems itemClass={itemClass} />}
+              {dropDownMode === "language" && <LanguageDropdownItems itemClass={itemClass} />}
             </Dropdown>
           )}
         </div>

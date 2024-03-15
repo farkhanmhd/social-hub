@@ -1,15 +1,11 @@
 import React from "react";
-import { useAppDispatch } from "@/app/states/hooks";
 import { IoArrowBackOutline } from "react-icons/io5";
-import { setLanguage } from "@/app/states/language/slice";
-import useReduxSelector from "@/app/hooks/useReduxSelector";
+import { useAppDispatch } from "../../states/hooks";
+import { setLanguage } from "../../states/language/slice";
+import useReduxSelector from "../../hooks/useReduxSelector";
 import { backToMainMenu } from "../../utils/util";
 
-export default function LanguageDropdownItems({
-  itemClass,
-}: {
-  itemClass: string;
-}) {
+export default function LanguageDropdownItems({ itemClass }: { itemClass: string }) {
   const dispatch = useAppDispatch();
   const { language } = useReduxSelector();
 
@@ -27,11 +23,7 @@ export default function LanguageDropdownItems({
   return (
     <>
       <li>
-        <button
-          type="button"
-          onClick={() => backToMainMenu(dispatch)}
-          className={itemClass}
-        >
+        <button type="button" onClick={() => backToMainMenu(dispatch)} className={itemClass}>
           <span>
             <IoArrowBackOutline />
           </span>
@@ -39,20 +31,12 @@ export default function LanguageDropdownItems({
         </button>
       </li>
       <li>
-        <button
-          type="button"
-          onClick={switchLanguageEnglish}
-          className={itemClass}
-        >
+        <button type="button" onClick={switchLanguageEnglish} className={itemClass}>
           <span>{language === "en" ? "English" : "Bahasa Inggris"}</span>
         </button>
       </li>
       <li>
-        <button
-          type="button"
-          onClick={switchLanguageIndonesia}
-          className={itemClass}
-        >
+        <button type="button" onClick={switchLanguageIndonesia} className={itemClass}>
           <span>{language === "en" ? "Indonesian" : "Bahasa Indonesia"}</span>
         </button>
       </li>

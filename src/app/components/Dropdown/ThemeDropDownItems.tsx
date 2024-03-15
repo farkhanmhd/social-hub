@@ -1,19 +1,11 @@
 import React from "react";
-import useReduxSelector from "@/app/hooks/useReduxSelector";
-import { useAppDispatch } from "@/app/states/hooks";
-import {
-  IoArrowBackOutline,
-  IoSunnyOutline,
-  IoMoonOutline,
-} from "react-icons/io5";
-import { setTheme } from "@/app/states/theme/slice";
+import { IoArrowBackOutline, IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
+import useReduxSelector from "../../hooks/useReduxSelector";
+import { useAppDispatch } from "../../states/hooks";
+import { setTheme } from "../../states/theme/slice";
 import { backToMainMenu } from "../../utils/util";
 
-export default function ThemeDropDownItems({
-  itemClass,
-}: {
-  itemClass: string;
-}) {
+export default function ThemeDropDownItems({ itemClass }: { itemClass: string }) {
   const dispatch = useAppDispatch();
 
   const setThemeLight = () => {
@@ -35,11 +27,7 @@ export default function ThemeDropDownItems({
   return (
     <>
       <li>
-        <button
-          type="button"
-          onClick={() => backToMainMenu(dispatch)}
-          className={itemClass}
-        >
+        <button type="button" onClick={() => backToMainMenu(dispatch)} className={itemClass}>
           <span>
             <IoArrowBackOutline />
           </span>
