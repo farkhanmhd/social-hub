@@ -4,6 +4,12 @@
 [![GitHub issues](https://img.shields.io/github/issues/farkhanmhd/social-hub)](https://github.com/farkhanmhd/social-hub/issues)
 [![GitHub stars](https://img.shields.io/github/stars/farkhanmhd/social-hub)](https://github.com/farkhanmhd/social-hub/stargazers)
 
+This project is a clone of Threads by instagram built with Next.js, TailwindCSS, Redux Toolkit, and Typescript.
+
+API docs for this project: [https://forum-api.dicoding.dev/v1#/](https://forum-api.dicoding.dev/v1#/)
+
+made by [farkhanmhd](https://github.com/farkhanmhd)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
