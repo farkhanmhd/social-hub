@@ -11,13 +11,7 @@ const api = (() => {
     return localStorage.getItem("accessToken");
   }
 
-  async function fetchWithAuth({
-    url,
-    options = {},
-  }: {
-    url: string;
-    options?: RequestInit;
-  }) {
+  async function fetchWithAuth({ url, options = {} }: { url: string; options?: RequestInit }) {
     return fetch(url, {
       ...options,
       headers: {
@@ -58,13 +52,7 @@ const api = (() => {
     return { status, message };
   }
 
-  async function login({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }) {
+  async function login({ email, password }: { email: string; password: string }) {
     const response = await fetch(`${BASE_URL}/login`, {
       method: "POST",
       headers: {
@@ -119,8 +107,8 @@ const api = (() => {
     const {
       data: { users },
     } = responseJson;
-    const userDetail = users.find((user: User) => user.id === id);
-    return userDetail;
+    const desiredUser = users.find((user: User) => user.id === id);
+    return desiredUser;
   }
 
   async function getOwnProfile() {
@@ -226,13 +214,7 @@ const api = (() => {
     return { ownerName, ownerProfilePicture, comments, avatar };
   }
 
-  async function createComment({
-    content,
-    threadId,
-  }: {
-    content: string;
-    threadId: string;
-  }) {
+  async function createComment({ content, threadId }: { content: string; threadId: string }) {
     const response = await fetchWithAuth({
       url: `${BASE_URL}/threads/${threadId}/comments`,
       options: {
@@ -311,13 +293,7 @@ const api = (() => {
     };
   }
 
-  async function likeComment({
-    threadId,
-    commentId,
-  }: {
-    threadId: string;
-    commentId: string;
-  }) {
+  async function likeComment({ threadId, commentId }: { threadId: string; commentId: string }) {
     const response = await fetchWithAuth({
       url: `${BASE_URL}/threads/${threadId}/comments/${commentId}/up-vote`,
       options: {
@@ -334,13 +310,7 @@ const api = (() => {
     }
   }
 
-  async function dislikeComment({
-    threadId,
-    commentId,
-  }: {
-    threadId: string;
-    commentId: string;
-  }) {
+  async function dislikeComment({ threadId, commentId }: { threadId: string; commentId: string }) {
     const response = await fetchWithAuth({
       url: `${BASE_URL}/threads/${threadId}/comments/${commentId}/down-vote`,
       options: {

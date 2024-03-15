@@ -1,5 +1,5 @@
-import api from "@/app/api/api";
 import { hideLoading, showLoading } from "react-redux-loading-bar";
+import api from "../../api/api";
 import { AppDispatch } from "..";
 import { setProfile } from "./slice";
 

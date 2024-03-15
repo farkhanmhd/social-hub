@@ -37,9 +37,7 @@ export default function ThreadItem({
   const onLikeHandler = (e: React.MouseEvent) => {
     e.preventDefault();
     if (!threadItemProps.upVotesBy.includes(authUser.id)) {
-      dispatch(
-        asyncLikeThread({ threadId: threadItemProps.id, userId: authUser.id }),
-      );
+      dispatch(asyncLikeThread({ threadId: threadItemProps.id, userId: authUser.id }));
     } else {
       dispatch(
         asyncNeutralizeThreadLike({
@@ -94,12 +92,8 @@ export default function ThreadItem({
           {threadItemProps?.ownerName}
         </Link>
       </div>
-      <div
-        className={`thread-title ${mode === "detail" ? "mb-5 ml-0 mt-3" : "mb-2 ml-4"}`}
-      >
-        <h1 className="text-xl font-semibold sm:text-2xl">
-          {threadItemProps?.title}
-        </h1>
+      <div className={`thread-title ${mode === "detail" ? "mb-5 ml-0 mt-3" : "mb-2 ml-4"}`}>
+        <h1 className="text-xl font-semibold sm:text-2xl">{parse(threadItemProps?.title)}</h1>
       </div>
       <div className="thread-category">
         <button
@@ -110,13 +104,9 @@ export default function ThreadItem({
         </button>
       </div>
       <div className="thread-posting-time flex items-center">
-        <p className="text-[#ababab]">
-          {getTimeDifference(threadItemProps?.createdAt)}
-        </p>
+        <p className="text-[#ababab]">{getTimeDifference(threadItemProps?.createdAt)}</p>
       </div>
-      <div
-        className={`thread-body ${mode === "detail" ? "ml-1" : "ml-4"} py-2`}
-      >
+      <div className={`thread-body ${mode === "detail" ? "ml-1" : "ml-4"} py-2`}>
         <div>{parse(threadItemProps?.body)}</div>
       </div>
       {mode !== "detail" && (
@@ -170,9 +160,7 @@ export default function ThreadItem({
           <ThreadButton onClick={(e) => onCommentHandler(e)}>
             <IoChatbubbleOutline />
           </ThreadButton>
-          {threadItemProps?.totalComments > 0 && (
-            <span>{threadItemProps?.totalComments}</span>
-          )}
+          {threadItemProps?.totalComments > 0 && <span>{threadItemProps?.totalComments}</span>}
         </div>
       </div>
     </div>

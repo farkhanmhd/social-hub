@@ -9,7 +9,7 @@ function asyncSetAuthUser({ email, password }: { email: string; password: string
     try {
       const token = await api.login({ email, password });
       api.putAccessToken(token);
-      dispatch(setAuthUser({ email, password }));
+      dispatch(setAuthUser({ email }));
       const authUser = await api.getOwnProfile();
       dispatch(setAuthUser(authUser));
       dispatch(hideLoading());

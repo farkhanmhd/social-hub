@@ -51,6 +51,7 @@ export default function StartThreadModal() {
 
   const onAddThread = (e: React.FormEvent) => {
     e.preventDefault();
+    const updatedTitle = `<span class="break-words">${title}</span>`;
     const imagesHtml = images
       .map((image) => `<img src="${image.dataURL}" alt="uploaded image" class="rounded-lg mb-3" />`)
       .join("");
@@ -59,6 +60,7 @@ export default function StartThreadModal() {
     dispatch(
       asyncAddThread({
         ...submittedThread,
+        title: updatedTitle,
         body: updatedBody,
         createdAt: postingTime,
         category,
